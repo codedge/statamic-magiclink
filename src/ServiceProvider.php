@@ -44,8 +44,13 @@ final class ServiceProvider extends AddonServiceProvider
         if ($this->app->runningInConsole()) {
             // Publish config
             $this->publishes([
-                __DIR__ . '/../config/config.php' => config_path('magiclink.php'),
+                __DIR__ . '/../config/config.php' => config_path('statamic-magiclink.php'),
             ], 'magiclink-config');
+
+            //Publish views
+            $this->publishes([
+                __DIR__ . '/../resources/views' => resource_path('views/vendor/statamic-magiclink/views'),
+            ], 'magiclink-views');
         }
     }
 
