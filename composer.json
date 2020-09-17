@@ -2,6 +2,7 @@
   "name": "codedge/statamic-magiclink",
   "description": "Create secure links for access to private data or Control Panel login without using a password",
   "keywords": ["statamic", "auth", "login", "link", "magic link", "magiclink", "passwordless"],
+  "license": "proprietary",
   "authors": [
     {
       "name": "Holger Lösken",
