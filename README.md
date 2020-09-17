@@ -5,7 +5,7 @@ which is sent by email.
 
 # Installation
 
-Run the following the pull in the package with composer
+Run the following the pull in the package with composer:
 
 ## Step 1
 
@@ -21,7 +21,11 @@ Login into your Statamic CP, see "MagicLink" in the side menu and enable it.
 
 On the CP login page you can now see a link "Send Magic Link". 
 
-:warning: Make sure your email settings are configured and email sending works. 
+:information_source: Make sure your email settings are configured and email sending works. 
+
+# Wishes & ideas
+
+Just open an [issue at Github](https://github.com/codedge/statamic-magiclink/issues) and I'll see what I can do :) 
 
 # License 
 
