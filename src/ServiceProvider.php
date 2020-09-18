@@ -56,6 +56,8 @@ final class ServiceProvider extends AddonServiceProvider
 
     public function register()
     {
+        $this->mergeConfigFrom(__DIR__ . '/../config/config.php', 'statamic-magiclink');
+
         /*
          * Swap login controller to be able to inject custom template.
          */

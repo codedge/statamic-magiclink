@@ -28,7 +28,7 @@ final class SettingsController extends BaseCpController
         $this->authorize('view settings');
 
         $request->validate([
-            'isEnabled' => ['required', 'boolean'],
+            'enabled' => ['required', 'boolean'],
             'expireTime' => ['required', 'numeric'],
         ]);
 

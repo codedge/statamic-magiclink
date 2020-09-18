@@ -13,7 +13,7 @@
         method="patch"
         action="{{ cp_route('magiclink.update') }}"
         index-url="{{ cp_route('dashboard') }}"
-        initial-is-enabled="{{ Statamic\Support\Str::bool($isEnabled) }}"
+        :initial-enabled="{{ Statamic\Support\Str::bool($enabled) }}"
         initial-expire-time="{{ $expireTime }}"
     ></magiclink-settings>
 

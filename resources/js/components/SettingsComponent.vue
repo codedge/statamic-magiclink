@@ -5,15 +5,15 @@
             <form-group
                 class="toggle-fieldtype"
                 fieldtype="toggle"
-                handle="isEnabled"
+                handle="enabled"
                 :display="__('magiclink::cp.settings.ml_enabled')"
                 :instructions="__('magiclink::cp.settings.ml_enabled_instructions')"
-                v-model="isEnabled"
+                v-model="enabled"
             />
 
             <form-group
-                handle="expireTime"
                 class="border-b"
+                handle="expireTime"
                 :display="__('magiclink::cp.settings.ml_expire_time')"
                 :errors="errors.expireTime"
                 :instructions="__('magiclink::cp.settings.ml_expire_time_instructions')"
@@ -38,7 +38,7 @@
                 type: Number,
                 required: true,
             },
-            initialIsEnabled: {
+            initialEnabled: {
                 type: Boolean,
                 required: true,
             },
@@ -56,7 +56,7 @@
           return {
               error: null,
               errors: {},
-              isEnabled: this.initialIsEnabled,
+              enabled: this.initialEnabled,
               expireTime: this.initialExpireTime,
           }
         },
@@ -68,7 +68,7 @@
 
             payload() {
                 return {
-                    isEnabled: this.isEnabled,
+                    enabled: this.enabled,
                     expireTime: this.expireTime,
                 }
             },
