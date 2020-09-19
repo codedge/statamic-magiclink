@@ -68,6 +68,10 @@ final class ServiceProvider extends AddonServiceProvider
         $this->app->bind(SettingsRepository::class, function () {
            return new SettingsRepository(new Filesystem());
         });
+
+        $this->app->bind(MagicLinkManager::class, function () {
+            return new MagicLinkManager(new Filesystem());
+        });
     }
 
     private function bootNavigation(): void
