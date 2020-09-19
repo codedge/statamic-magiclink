@@ -32,9 +32,9 @@ final class SettingsRepository
         return $this->get()->get(self::IS_ENABLED_KEY);
     }
 
-    public function expireTime(): string
+    public function expireTime(): int
     {
-        return $this->get()->get(self::EXPIRE_TIME_KEY);
+        return (int) $this->get()->get(self::EXPIRE_TIME_KEY);
     }
 
     public function get(): Collection

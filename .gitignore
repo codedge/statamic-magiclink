@@ -1,2 +1,5 @@
+.phpunit.result.cache
+
+coverage/
 node_modules/
 vendor/

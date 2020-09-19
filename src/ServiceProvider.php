@@ -5,6 +5,8 @@ namespace Codedge\MagicLink;
 use Codedge\MagicLink\Events\LinkCreated;
 use Codedge\MagicLink\Http\Controllers\Cp\Auth\LoginController;
 use Codedge\MagicLink\Listeners\SendLinkNotification;
+use Codedge\MagicLink\Repositories\SettingsRepository;
+use Illuminate\Filesystem\Filesystem;
 use Statamic\Facades\CP\Nav;
 use Statamic\Facades\Permission;
 use Statamic\Providers\AddonServiceProvider;
@@ -62,6 +64,10 @@ final class ServiceProvider extends AddonServiceProvider
          * Swap login controller to be able to inject custom template.
          */
         $this->app->bind(StatamicLoginController::class, LoginController::class);
+
+        $this->app->bind(SettingsRepository::class, function () {
+           return new SettingsRepository(new Filesystem());
+        });
     }
 
     private function bootNavigation(): void

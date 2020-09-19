@@ -2,6 +2,7 @@
   "name": "codedge/statamic-magiclink",
   "description": "Create secure links for access to private data or Control Panel login without using a password",
   "keywords": ["statamic", "auth", "login", "link", "magic link", "magiclink", "passwordless"],
+  "type": "statamic-addon",
   "license": "proprietary",
   "authors": [
     {
@@ -15,13 +16,15 @@
     "source": "https://github.com/codedge/statamic-magiclink"
 },
   "config": {
+    "process-timeout": 0,
     "sort-packages": true
   },
   "require": {
     "php": "^7.4",
-    "statamic/cms": "^3.0"
+    "statamic/cms": "3.0.*"
   },
   "require-dev": {
+    "orchestra/testbench": "^5.0",
     "phpunit/phpunit": "^8.5"
   },
   "autoload": {
@@ -31,8 +34,12 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "Codedge\\MagicLink\\Test\\": "tests"
+      "Codedge\\MagicLink\\Tests\\": "tests"
     }
+  },
+  "scripts": {
+      "test": "./vendor/bin/phpunit",
+      "test-coverage": "./vendor/bin/phpunit --coverage-html coverage"
   },
   "extra": {
     "laravel": {
