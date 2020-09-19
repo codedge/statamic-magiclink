@@ -1,0 +1,46 @@
+name: Tests
+jobs:
+    run:
+        runs-on: ubuntu-latest
+        strategy:
+            matrix:
+                php: ['7.4']
+                laravel: [7.*]
+                dependency-version: [prefer-stable]
+                include:
+                    - laravel: 7.*
+                      testbench: 5.*
+        name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.dependency-version }}
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v1
+
+            - name: Setup PHP
+              uses: shivammathur/setup-php@v1
+              with:
+                  php-version: ${{ matrix.php }}
+                  extensions: mbstring, intl, json, zip
+                  coverage: xdebug
+
+            - name: Get Composer Cache Directory
+              id: composer-cache
+              run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+
+            - name: Cache dependencies
+              uses: actions/cache@v1
+              with:
+                  path: ~/.composer/cache/files
+                  key: dependencies-laravel-${{ matrix.laravel }}-php-${{ matrix.php }}-composer-${{ hashFiles('composer.json') }}
+
+            - name: Install dependencies
+              run: |
+                  composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" --no-interaction --no-update
+                  composer update --${{ matrix.dependency-version }} --prefer-dist --no-interaction --no-suggest
+              env:
+                  APP_ENV: testing
+
+            - name: Run tests
+              run: ./vendor/bin/phpunit
+              env:
+                  APP_ENV: testing
+
