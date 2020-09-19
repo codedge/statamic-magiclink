@@ -8,7 +8,7 @@ use Statamic\Facades\YAML;
 
 final class SettingsRepository
 {
-    const IS_ENABLED_KEY = 'isEnabled';
+    const IS_ENABLED_KEY = 'enabled';
     const EXPIRE_TIME_KEY = 'expireTime';
 
     private array $defaultValues;
