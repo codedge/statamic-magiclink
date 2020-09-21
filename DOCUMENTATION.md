@@ -1,3 +1,12 @@
+## Protecting content
+
+You can use magic links with Statamics [Protecting Content](https://statamic.dev/protecting-content) feature.
+When [defining a password form](https://statamic.dev/protecting-content#password-form) just use one of these tags to
+show a magic link login below the normal password login form:
+
+*  `{{ magiclink:login-link }}`: Displays a completely rendered `a` tag. For customizing the html, see [Customization](#Customization).
+*  `{{ magiclink:login-route }}`: Return the route to the magic link form. Use this with your own markup. 
+
 ## Permissions
 
 The access to settings of MagicLink can be restricted to certain users. When navigation to _Permissions_ inside the

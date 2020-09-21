@@ -29,6 +29,10 @@ final class ServiceProvider extends AddonServiceProvider
         __DIR__.'/../public/js/statamic-magiclink.js',
     ];
 
+    protected $tags = [
+        \Codedge\MagicLink\Tags\Magiclink::class,
+    ];
+
     protected $listen = [
         LinkCreated::class => [
             SendLinkNotification::class,
