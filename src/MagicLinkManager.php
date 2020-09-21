@@ -60,7 +60,7 @@ final class MagicLinkManager
 
     private function get(): Collection
     {
-        if (!$this->files->exists($this->path)) {
+        if (! $this->files->exists($this->path)) {
             return collect();
         }
 
@@ -69,7 +69,7 @@ final class MagicLinkManager
 
     private function save(Collection $content)
     {
-        if (!$this->files->isDirectory($dir = dirname($this->path))) {
+        if (! $this->files->isDirectory($dir = dirname($this->path))) {
             $this->files->makeDirectory($dir);
         }
 

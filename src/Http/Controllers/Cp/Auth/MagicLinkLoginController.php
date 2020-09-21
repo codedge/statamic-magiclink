@@ -21,7 +21,7 @@ class MagicLinkLoginController extends BaseCpController
 
     public function login(Request $request)
     {
-        abort_if(!$request->hasValidSignature(), 401, __('magiclink::web.magic_link_signature_invalid'));
+        abort_if(! $request->hasValidSignature(), 401, __('magiclink::web.magic_link_signature_invalid'));
 
         $user = User::findByEmail($request->get('user_email'));
         Auth::guard('web')->login($user);

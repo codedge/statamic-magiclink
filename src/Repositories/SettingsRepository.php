@@ -41,7 +41,7 @@ final class SettingsRepository
 
     public function get(): Collection
     {
-        if (!$this->files->exists($this->path)) {
+        if (! $this->files->exists($this->path)) {
             return collect($this->defaultValues);
         }
 
@@ -50,7 +50,7 @@ final class SettingsRepository
 
     public function put($content)
     {
-        if (!$this->files->isDirectory($dir = dirname($this->path))) {
+        if (! $this->files->isDirectory($dir = dirname($this->path))) {
             $this->files->makeDirectory($dir);
         }
 

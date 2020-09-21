@@ -22,7 +22,7 @@ class LoginController extends StatamicLoginController
 
     public function showLoginForm(Request $request)
     {
-        if (!$this->settingsRepository->isEnabled()) {
+        if (! $this->settingsRepository->isEnabled()) {
             return parent::showLoginForm($request);
         }
 
@@ -46,11 +46,11 @@ class LoginController extends StatamicLoginController
     private function hasError()
     {
         return function ($field) {
-            if (!$error = optional(session('errors'))->first($field)) {
+            if (! $error = optional(session('errors'))->first($field)) {
                 return false;
             }
 
-            return !in_array($error, [
+            return ! in_array($error, [
                 __('auth.failed'),
                 __('statamic::validation.required'),
             ]);

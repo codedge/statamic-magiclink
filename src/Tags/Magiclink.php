@@ -18,11 +18,11 @@ class Magiclink extends Tags
 
     public function loginLink()
     {
-        return ($this->settingsRepository->isEnabled() ? view('magiclink::partials.login-link') : '');
+        return $this->settingsRepository->isEnabled() ? view('magiclink::partials.login-link') : '';
     }
 
     public function loginRoute(): string
     {
-        return ($this->settingsRepository->isEnabled() ? route('magiclink.show-send-link-form') : '');
+        return $this->settingsRepository->isEnabled() ? route('magiclink.show-send-link-form') : '';
     }
 }
