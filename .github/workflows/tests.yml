@@ -47,3 +47,11 @@ jobs:
               env:
                   APP_ENV: testing
 
+            - uses: codecov/codecov-action@v1
+              name: Push coverage to codecov
+              with:
+                token: ${{ secrets.CODECOV_TOKEN }}
+                file: ./clover.xml
+                flags: unittests
+                name: codecov-umbrella
+                fail_ci_if_error: true
