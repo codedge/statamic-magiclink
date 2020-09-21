@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Codedge\MagicLink;
 
@@ -9,36 +11,37 @@ use Codedge\MagicLink\Repositories\SettingsRepository;
 use Illuminate\Filesystem\Filesystem;
 use Statamic\Facades\CP\Nav;
 use Statamic\Facades\Permission;
-use Statamic\Providers\AddonServiceProvider;
 use Statamic\Http\Controllers\CP\Auth\LoginController as StatamicLoginController;
+use Statamic\Providers\AddonServiceProvider;
 
 final class ServiceProvider extends AddonServiceProvider
 {
     protected $routes = [
-        'cp' => __DIR__.'/../routes/cp.php',
+        'cp'  => __DIR__.'/../routes/cp.php',
         'web' => __DIR__.'/../routes/web.php',
     ];
 
     protected $stylesheets = [
-        __DIR__ . '/../public/css/statamic-magiclink.css'
+        __DIR__.'/../public/css/statamic-magiclink.css',
     ];
 
     protected $scripts = [
-        __DIR__ . '/../public/js/statamic-magiclink.js'
+        __DIR__.'/../public/js/statamic-magiclink.js',
     ];
 
     protected $listen = [
         LinkCreated::class => [
-            SendLinkNotification::class
+            SendLinkNotification::class,
         ],
     ];
 
     protected $viewNamespace = 'magiclink';
 
-    public function boot() {
+    public function boot()
+    {
         parent::boot();
 
-        $this->loadTranslationsFrom(__DIR__ . '/../resources/lang', 'magiclink');
+        $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'magiclink');
 
         $this->bootNavigation();
         $this->bootPermissions();
@@ -46,19 +49,19 @@ final class ServiceProvider extends AddonServiceProvider
         if ($this->app->runningInConsole()) {
             // Publish config
             $this->publishes([
-                __DIR__ . '/../config/config.php' => config_path('statamic-magiclink.php'),
+                __DIR__.'/../config/config.php' => config_path('statamic-magiclink.php'),
             ], 'magiclink-config');
 
             //Publish views
             $this->publishes([
-                __DIR__ . '/../resources/views' => resource_path('views/vendor/statamic-magiclink/views'),
+                __DIR__.'/../resources/views' => resource_path('views/vendor/statamic-magiclink/views'),
             ], 'magiclink-views');
         }
     }
 
     public function register()
     {
-        $this->mergeConfigFrom(__DIR__ . '/../config/config.php', 'statamic-magiclink');
+        $this->mergeConfigFrom(__DIR__.'/../config/config.php', 'statamic-magiclink');
 
         /*
          * Swap login controller to be able to inject custom template.
@@ -66,7 +69,7 @@ final class ServiceProvider extends AddonServiceProvider
         $this->app->bind(StatamicLoginController::class, LoginController::class);
 
         $this->app->bind(SettingsRepository::class, function () {
-           return new SettingsRepository(new Filesystem());
+            return new SettingsRepository(new Filesystem());
         });
 
         $this->app->bind(MagicLinkManager::class, function () {

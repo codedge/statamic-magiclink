@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Codedge\MagicLink;
 
@@ -48,7 +50,7 @@ final class MagicLinkManager
 
         $payload[$this->user->email()] = [
             'expire_time' => $this->magicLink->getExpireTime(),
-            'hash' => $link->getHash(),
+            'hash'        => $link->getHash(),
         ];
 
         $this->save(collect($payload));
@@ -58,7 +60,7 @@ final class MagicLinkManager
 
     private function get(): Collection
     {
-        if (! $this->files->exists($this->path)) {
+        if (!$this->files->exists($this->path)) {
             return collect();
         }
 
@@ -67,7 +69,7 @@ final class MagicLinkManager
 
     private function save(Collection $content)
     {
-        if (! $this->files->isDirectory($dir = dirname($this->path))) {
+        if (!$this->files->isDirectory($dir = dirname($this->path))) {
             $this->files->makeDirectory($dir);
         }
 
@@ -78,6 +80,4 @@ final class MagicLinkManager
 
         return $this->files->put($this->path, YAML::dump($merged->all()));
     }
-
-
 }

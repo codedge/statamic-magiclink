@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Codedge\MagicLink\Http\Controllers\Cp\Auth;
 
@@ -20,16 +22,16 @@ class LoginController extends StatamicLoginController
 
     public function showLoginForm(Request $request)
     {
-        if(!$this->settingsRepository->isEnabled()) {
+        if (!$this->settingsRepository->isEnabled()) {
             return parent::showLoginForm($request);
         }
 
         $data = [
-            'title' => __('Log in'),
-            'oauth' => $enabled = OAuth::enabled(),
+            'title'     => __('Log in'),
+            'oauth'     => $enabled = OAuth::enabled(),
             'providers' => $enabled ? OAuth::providers() : [],
-            'referer' => $this->getReferrer(),
-            'hasError' => $this->hasError(),
+            'referer'   => $this->getReferrer(),
+            'hasError'  => $this->hasError(),
         ];
 
         $view = view('magiclink::auth.login', $data);
@@ -44,11 +46,11 @@ class LoginController extends StatamicLoginController
     private function hasError()
     {
         return function ($field) {
-            if (! $error = optional(session('errors'))->first($field)) {
+            if (!$error = optional(session('errors'))->first($field)) {
                 return false;
             }
 
-            return ! in_array($error, [
+            return !in_array($error, [
                 __('auth.failed'),
                 __('statamic::validation.required'),
             ]);

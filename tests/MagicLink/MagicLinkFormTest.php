@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Codedge\MagicLink\Tests\MagicLink;
 
@@ -18,14 +20,14 @@ class MagicLinkFormTest extends TestCase
     public function cannot_get_link_for_invalid_address(): void
     {
         $payload = [
-            'email' => 'wrong-email-format'
+            'email' => 'wrong-email-format',
         ];
 
         $this->post(route('magiclink.send-link'), $payload)
              ->assertSessionHasErrors(['email']);
 
         $payload = [
-            'email' => ''
+            'email' => '',
         ];
 
         $this->post(route('magiclink.send-link'), $payload)
@@ -43,5 +45,4 @@ class MagicLinkFormTest extends TestCase
 //
 //
 //    }
-
 }
