@@ -40,8 +40,8 @@ final class MagicLinkController extends BaseWebController
         $user = User::findByEmail($request->email);
 
         if ($user !== null) {
-             $link = $this->magicLinkRepository->createForUser($user)->generate();
-             event(new LinkCreated($link, $user));
+            $link = $this->magicLinkRepository->createForUser($user)->generate();
+            event(new LinkCreated($link, $user));
         }
 
         session()->flash('success', __('magiclink::web.address_exists_then_email'));
