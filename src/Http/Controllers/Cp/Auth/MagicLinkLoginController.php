@@ -1,12 +1,14 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Codedge\MagicLink\Http\Controllers\Cp\Auth;
 
 use Codedge\MagicLink\Http\Controllers\Cp\BaseCpController;
 use Codedge\MagicLink\MagicLinkManager;
 use Illuminate\Http\Request;
-use Statamic\Facades\User;
 use Illuminate\Support\Facades\Auth;
+use Statamic\Facades\User;
 
 class MagicLinkLoginController extends BaseCpController
 {

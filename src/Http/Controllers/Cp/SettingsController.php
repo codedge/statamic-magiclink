@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Codedge\MagicLink\Http\Controllers\Cp;
 
@@ -28,7 +30,7 @@ final class SettingsController extends BaseCpController
         $this->authorize('view settings');
 
         $request->validate([
-            'enabled' => ['required', 'boolean'],
+            'enabled'    => ['required', 'boolean'],
             'expireTime' => ['required', 'numeric'],
         ]);
 
@@ -37,7 +39,7 @@ final class SettingsController extends BaseCpController
         session()->flash('success', __('magiclink::cp.settings.updated_successfully'));
 
         return [
-            'redirect' => cp_route('magiclink.index')
+            'redirect' => cp_route('magiclink.index'),
         ];
     }
 }

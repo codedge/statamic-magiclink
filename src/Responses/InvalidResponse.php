@@ -6,6 +6,5 @@ class InvalidResponse
 {
     public function __invoke()
     {
-
     }
 }

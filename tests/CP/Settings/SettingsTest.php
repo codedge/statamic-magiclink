@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Codedge\MagicLink\Tests\CP\Settings;
 
@@ -25,7 +27,7 @@ class SettingsTest extends TestCase
     public function can_update_settings_without_error(): void
     {
         $payload = [
-            'enabled' => true,
+            'enabled'    => true,
             'expireTime' => 999,
         ];
 
@@ -39,7 +41,7 @@ class SettingsTest extends TestCase
     public function cannot_update_settings_with_all_errors(): void
     {
         $payload = [
-            'enabled' => 123,
+            'enabled'    => 123,
             'expireTime' => 'test',
         ];
 
@@ -51,7 +53,7 @@ class SettingsTest extends TestCase
     public function cannot_update_settings_with_enabled_errors(): void
     {
         $payload = [
-            'enabled' => 123,
+            'enabled'    => 123,
             'expireTime' => 30,
         ];
 
@@ -70,7 +72,7 @@ class SettingsTest extends TestCase
     public function cannot_update_settings_with_expire_time_errors(): void
     {
         $payload = [
-            'enabled' => true,
+            'enabled'    => true,
             'expireTime' => 'test',
         ];
 
@@ -91,7 +93,7 @@ class SettingsTest extends TestCase
         $repository = $this->app->make(SettingsRepository::class);
 
         $payload = [
-            'enabled' => true,
+            'enabled'    => true,
             'expireTime' => 300,
         ];
 
@@ -99,7 +101,7 @@ class SettingsTest extends TestCase
         $this->assertTrue($repository->isEnabled());
 
         $payload = [
-            'enabled' => false,
+            'enabled'    => false,
             'expireTime' => 300,
         ];
 
@@ -113,7 +115,7 @@ class SettingsTest extends TestCase
         $repository = $this->app->make(SettingsRepository::class);
 
         $payload = [
-            'enabled' => true,
+            'enabled'    => true,
             'expireTime' => 300,
         ];
 

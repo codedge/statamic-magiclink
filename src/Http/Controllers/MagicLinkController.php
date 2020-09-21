@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Codedge\MagicLink\Http\Controllers;
 
@@ -25,20 +27,20 @@ final class MagicLinkController extends BaseWebController
     public function sendLink(Request $request)
     {
         $request->validate([
-           'email' => ['required', 'email']
+            'email' => ['required', 'email'],
         ]);
 
         $user = User::findByEmail($request->email);
 
-        if($user !== null) {
-            $link = $this->magicLinkRepository->createForUser($user)->generate();
-            event(new LinkCreated($link, $user));
+        if ($user !== null) {
+             $link = $this->magicLinkRepository->createForUser($user)->generate();
+             event(new LinkCreated($link, $user));
         }
 
         session()->flash('success', __('magiclink::web.address_exists_then_email'));
 
         return [
-            'redirect' => cp_route('login')
+            'redirect' => cp_route('login'),
         ];
     }
 }
