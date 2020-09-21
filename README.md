@@ -4,8 +4,8 @@
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/codedge/statamic-magiclink?style=for-the-badge)](https://packagist.org/packages/codedge/statamic-magiclink)
 ![Tests](https://github.com/codedge/statamic-magiclink/workflows/Tests/badge.svg)
 
-A Statamic V3 addon to provide the option to login into the Control Panel without using a password. Instead use a magic link
-which is sent by email.
+A Statamic V3 addon to provide the option to login into the Control Panel or Statamic [Protected Content](https://statamic.dev/protecting-content) feature without using a password,
+instead use a magic link which is sent by email.
 
 # Installation
 
@@ -29,7 +29,7 @@ On the CP login page you can now see a link "Send Magic Link".
 
 # Wishes & ideas
 
-Just open an [issue at Github](https://github.com/codedge/statamic-magiclink/issues) and I'll see what I can do :) 
+Just open an [issue at Github](https://github.com/codedge/statamic-magiclink/issues).
 
 # License 
 
