@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Codedge\MagicLink\Mail\MagicLink;
 
@@ -12,7 +14,7 @@ final class LinkInformation extends Mailable implements ShouldQueue
     protected MagicLink $magicLink;
     protected User $user;
 
-    public function __construct (MagicLink $magicLink, User $user)
+    public function __construct(MagicLink $magicLink, User $user)
     {
         $this->magicLink = $magicLink;
         $this->user = $user;
@@ -20,9 +22,9 @@ final class LinkInformation extends Mailable implements ShouldQueue
 
     public function build()
     {
-        return $this->subject(config('app.name') . ' - ' .  __('magiclink::cp.email.new_link_subject'))
+        return $this->subject(config('app.name').' - '.__('magiclink::cp.email.new_link_subject'))
                     ->markdown('magiclink::emails.new-login-link', [
-                        'userName' => $this->user->name,
+                        'userName'  => $this->user->name,
                         'magicLink' => $this->magicLink->getLink(),
                     ]);
     }

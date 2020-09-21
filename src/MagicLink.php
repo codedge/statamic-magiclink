@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Codedge\MagicLink;
 
@@ -18,7 +20,7 @@ final class MagicLink
     public function __construct(User $user)
     {
         $this->expireTime = now()->addMinutes(config('statamic-magiclink.expire_time'));
-        $this->path = config('statamic-magiclink.url.path') . '/login';
+        $this->path = config('statamic-magiclink.url.path').'/login';
         $this->redirectTo = config('statamic-magiclink.url.redirect_on_success');
         $this->user = $user;
     }
@@ -65,7 +67,7 @@ final class MagicLink
             'magiclink.login',
             $this->expireTime,
             [
-                'hash' => $this->generateHash(),
+                'hash'       => $this->generateHash(),
                 'user_email' => $this->user->email(),
             ]
         );

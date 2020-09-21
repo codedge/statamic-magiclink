@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Codedge\MagicLink\Tests;
 
@@ -6,9 +8,9 @@ use Codedge\MagicLink\ServiceProvider;
 use Illuminate\Foundation\Application;
 use Orchestra\Testbench\TestCase as OrchestraTestCase;
 use Statamic\Extend\Manifest;
+use Statamic\Facades\Role;
 use Statamic\Facades\User;
 use Statamic\Providers\StatamicServiceProvider;
-use Statamic\Facades\Role;
 use Statamic\Statamic;
 
 class TestCase extends OrchestraTestCase
@@ -29,8 +31,10 @@ class TestCase extends OrchestraTestCase
     }
 
     /**
-     * Sign in a Statamic user
+     * Sign in a Statamic user.
+     *
      * @param array $permissions
+     *
      * @return mixed
      */
     protected function signInUser($permissions = [])
@@ -40,11 +44,13 @@ class TestCase extends OrchestraTestCase
         $user = User::make();
         $user->id(1)->email('test@mail.de')->assignRole($role);
         $this->be($user);
+
         return $user;
     }
 
     /**
-     * Sign in a Statamic user as admin
+     * Sign in a Statamic user as admin.
+     *
      * @return mixed
      */
     protected function signInAdmin()
@@ -52,12 +58,15 @@ class TestCase extends OrchestraTestCase
         $user = User::make();
         $user->id(1)->email('test@mail.de')->makeSuper();
         $this->be($user);
+
         return $user;
     }
 
     /**
-     * Load package service provider
+     * Load package service provider.
+     *
      * @param Application $app
+     *
      * @return array
      */
     protected function getPackageProviders($app)
@@ -65,13 +74,15 @@ class TestCase extends OrchestraTestCase
         return [
 
             StatamicServiceProvider::class,
-            ServiceProvider::class
+            ServiceProvider::class,
         ];
     }
 
     /**
-     * Load package alias
+     * Load package alias.
+     *
      * @param Application $app
+     *
      * @return array
      */
     protected function getPackageAliases($app)
@@ -82,7 +93,8 @@ class TestCase extends OrchestraTestCase
     }
 
     /**
-     * Load Environment
+     * Load Environment.
+     *
      * @param Application $app
      */
     protected function getEnvironmentSetUp($app)
@@ -98,7 +110,8 @@ class TestCase extends OrchestraTestCase
     }
 
     /**
-     * Resolve the Application Configuration and set the Statamic configuration
+     * Resolve the Application Configuration and set the Statamic configuration.
+     *
      * @param Application $app
      */
     protected function resolveApplicationConfiguration($app)
@@ -111,7 +124,7 @@ class TestCase extends OrchestraTestCase
         ];
 
         foreach ($configs as $config) {
-            $app['config']->set("statamic.$config", require(__DIR__ . "/../vendor/statamic/cms/config/{$config}.php"));
+            $app['config']->set("statamic.$config", require(__DIR__."/../vendor/statamic/cms/config/{$config}.php"));
         }
 
         // Setting the user repository to the default flat file system
@@ -121,14 +134,14 @@ class TestCase extends OrchestraTestCase
         $app['config']->set('statamic.editions.pro', true);
 
         Statamic::pushCpRoutes(function () {
-            return require_once realpath(__DIR__ . '/../routes/cp.php');
+            return require_once realpath(__DIR__.'/../routes/cp.php');
         });
 
         Statamic::pushWebRoutes(function () {
-            return require_once realpath(__DIR__ . '/../routes/web.php');
+            return require_once realpath(__DIR__.'/../routes/web.php');
         });
 
         // Define magiclink config settings for all of our tests
-        $app['config']->set("statamic-magiclink", require(__DIR__ . "/../config/config.php"));
+        $app['config']->set('statamic-magiclink', require(__DIR__.'/../config/config.php'));
     }
 }

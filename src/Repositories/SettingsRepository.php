@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Codedge\MagicLink\Repositories;
 
@@ -22,8 +24,8 @@ final class SettingsRepository
         $this->path = storage_path('statamic-magiclink/settings.yaml');
 
         $this->defaultValues = [
-          self::IS_ENABLED_KEY => false,
-          self::EXPIRE_TIME_KEY => config('statamic-magiclink.expire_time'),
+            self::IS_ENABLED_KEY  => false,
+            self::EXPIRE_TIME_KEY => config('statamic-magiclink.expire_time'),
         ];
     }
 
@@ -39,7 +41,7 @@ final class SettingsRepository
 
     public function get(): Collection
     {
-        if (! $this->files->exists($this->path)) {
+        if (!$this->files->exists($this->path)) {
             return collect($this->defaultValues);
         }
 
@@ -48,7 +50,7 @@ final class SettingsRepository
 
     public function put($content)
     {
-        if (! $this->files->isDirectory($dir = dirname($this->path))) {
+        if (!$this->files->isDirectory($dir = dirname($this->path))) {
             $this->files->makeDirectory($dir);
         }
 
