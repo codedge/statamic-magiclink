@@ -1,5 +1,5 @@
 .phpunit.result.cache
-
+clover.xml
 coverage/
 node_modules/
 vendor/
