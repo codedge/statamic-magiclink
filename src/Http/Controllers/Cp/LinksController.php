@@ -6,7 +6,6 @@ namespace Codedge\MagicLink\Http\Controllers\Cp;
 
 use Carbon\Carbon;
 use Codedge\MagicLink\MagicLinkManager;
-use Illuminate\Http\Request;
 use Statamic\CP\Column;
 
 final class LinksController extends BaseCpController

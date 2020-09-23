@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Codedge\MagicLink;
 
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\URL;
 use Statamic\Contracts\Auth\User;
 
@@ -19,7 +18,6 @@ final class MagicLink
     /**
      * Redirect to the page after a successful login. This is either the CP dashboard or a page with protected
      * content.
-     *
      */
     protected string $redirectTo;
     protected string $link;
