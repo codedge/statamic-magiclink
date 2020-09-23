@@ -28,11 +28,11 @@ class MagicLinkLoginController extends BaseCpController
          * the protected content feature.
          */
         $user = User::findByEmail($request->get('user_email'));
-        if($user !== null) {
+        if ($user !== null) {
             Auth::guard('web')->login($user);
         }
 
-        $redirect = !empty($this->magicLinkManager->get()->get($user->email())['redirect_to'])
+        $redirect = ! empty($this->magicLinkManager->get()->get($user->email())['redirect_to'])
                     ? route($this->magicLinkManager->get()->get($user->email())['redirect_to'])
                     : cp_route(config('statamic-magiclink.url.redirect_on_success'));
 

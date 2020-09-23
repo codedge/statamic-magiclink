@@ -24,7 +24,7 @@ final class MagicLink
     {
         $previousRoute = $request->create(url()->previous());
 
-        if($request->has('referer')) {
+        if ($request->has('referer')) {
             $previousRoute = $request->create($request->get('referer'));
         }
 
