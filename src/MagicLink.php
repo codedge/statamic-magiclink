@@ -5,13 +5,22 @@ declare(strict_types=1);
 namespace Codedge\MagicLink;
 
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\URL;
 use Statamic\Contracts\Auth\User;
 
 final class MagicLink
 {
+    /**
+     * Time, the link expires.
+     */
     protected Carbon $expireTime;
-    protected string $path;
+
+    /**
+     * Redirect to the page after a successful login. This is either the CP dashboard or a page with protected
+     * content.
+     *
+     */
     protected string $redirectTo;
     protected string $link;
     protected string $hash;
@@ -20,7 +29,6 @@ final class MagicLink
     public function __construct(User $user)
     {
         $this->expireTime = now()->addMinutes(config('statamic-magiclink.expire_time'));
-        $this->path = config('statamic-magiclink.url.path').'/login';
         $this->redirectTo = config('statamic-magiclink.url.redirect_on_success');
         $this->user = $user;
     }
@@ -44,11 +52,9 @@ final class MagicLink
         return $this;
     }
 
-    public function setPath(string $path): self
+    public function getRedirectTo(): string
     {
-        $this->path = $path;
-
-        return $this;
+        return $this->redirectTo;
     }
 
     public function getHash(): string

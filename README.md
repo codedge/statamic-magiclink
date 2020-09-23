@@ -7,6 +7,12 @@
 A Statamic V3 addon to provide the option to login into the Control Panel or Statamic [Protected Content](https://statamic.dev/protecting-content) feature without using a password,
 instead use a magic link which is sent by email.
 
+**Features**
+* Login to Control Panel with magic links
+* Login to protected content with custom password form with magic links
+* Display issued magic links in Control Panel
+* Permission scheme for display links and settings in Control Panel
+
 # Installation
 
 Run the following the pull in the package with composer:

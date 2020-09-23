@@ -39,6 +39,12 @@ final class ServiceProvider extends AddonServiceProvider
         ],
     ];
 
+    protected $middlewareGroups = [
+        'magic-link' => [
+            \Codedge\MagicLink\Http\Middleware\MagicLink::class,
+        ],
+    ];
+
     protected $viewNamespace = 'magiclink';
 
     public function boot()
@@ -87,8 +93,12 @@ final class ServiceProvider extends AddonServiceProvider
             $nav->create('MagicLink')
                 ->icon('link')
                 ->section('Tools')
-                ->route('magiclink.index')
-                ->can(auth()->user()->can('view settings'));
+                ->children([
+                    Nav::item(__('magiclink::cp.settings.settings'))->route('magiclink.index')
+                                                                    ->can('view settings'),
+                    Nav::item(__('magiclink::cp.links.links'))->route('magiclink.links.index')
+                                                              ->can('view links'),
+                ]);
         });
     }
 
@@ -100,6 +110,11 @@ final class ServiceProvider extends AddonServiceProvider
                     $permission
                         ->label(__('magiclink::cp.permissions.view_settings'))
                         ->description(__('magiclink::cp.permissions.view_settings_description'));
+                });
+                Permission::register('view links', function (\Statamic\Auth\Permission $permission) {
+                    $permission
+                        ->label(__('magiclink::cp.permissions.view_links'))
+                        ->description(__('magiclink::cp.permissions.view_links_description'));
                 });
             });
         });

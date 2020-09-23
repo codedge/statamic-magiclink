@@ -13,13 +13,13 @@ final class SettingsController extends BaseCpController
 
     public function __construct(SettingsRepository $settingsRepository)
     {
+        $this->authorize('view settings');
+
         $this->settingsRepository = $settingsRepository;
     }
 
     public function index()
     {
-        $this->authorize('view settings');
-
         $settings = $this->settingsRepository->get();
 
         return view('magiclink::cp.settings.index', $settings->all());
@@ -27,8 +27,6 @@ final class SettingsController extends BaseCpController
 
     public function update(Request $request)
     {
-        $this->authorize('view settings');
-
         $request->validate([
             'enabled'    => ['required', 'boolean'],
             'expireTime' => ['required', 'numeric'],

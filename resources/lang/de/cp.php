@@ -18,6 +18,7 @@ return [
         'view_settings_description' => 'Zugriff, um Einstellungen anzusehen.',
     ],
     'email' => [
+        'email' => 'E-Mail',
         'new_link_subject' => 'Ihr Login-Link',
     ],
 

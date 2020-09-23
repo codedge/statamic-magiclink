@@ -1,5 +1,5 @@
 @extends('statamic::layout')
-@section('title', 'MagicLink')
+@section('title', Statamic::crumb(__('magiclink::cp.settings.settings'), __('MagicLink')))
 
 @section('content')
     <header class="mb-3">

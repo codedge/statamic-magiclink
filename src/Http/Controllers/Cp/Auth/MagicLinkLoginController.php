@@ -23,9 +23,19 @@ class MagicLinkLoginController extends BaseCpController
     {
         abort_if(! $request->hasValidSignature(), 401, __('magiclink::web.magic_link_signature_invalid'));
 
+        /*
+         * This handles the login for registered users. If no user is found, then we're probably using
+         * the protected content feature.
+         */
         $user = User::findByEmail($request->get('user_email'));
-        Auth::guard('web')->login($user);
+        if($user !== null) {
+            Auth::guard('web')->login($user);
+        }
 
-        return redirect(cp_route(config('statamic-magiclink.url.redirect_on_success')));
+        $redirect = !empty($this->magicLinkManager->get()->get($user->email())['redirect_to'])
+                    ? route($this->magicLinkManager->get()->get($user->email())['redirect_to'])
+                    : cp_route(config('statamic-magiclink.url.redirect_on_success'));
+
+        return redirect($redirect);
     }
 }

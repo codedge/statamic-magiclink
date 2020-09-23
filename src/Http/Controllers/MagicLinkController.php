@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Codedge\MagicLink\Http\Controllers;
 
 use Codedge\MagicLink\Events\LinkCreated;
+use Codedge\MagicLink\Http\Middleware\MagicLink;
 use Codedge\MagicLink\MagicLinkManager;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -12,8 +13,6 @@ use Statamic\Facades\User;
 
 final class MagicLinkController extends BaseWebController
 {
-    private const LOGIN_FORM_REFERER_SESSION_KEY = 'login-form-referer';
-
     protected MagicLinkManager $magicLinkRepository;
     protected User $user;
 
@@ -24,10 +23,8 @@ final class MagicLinkController extends BaseWebController
 
     public function showSendLinkForm()
     {
-        Session::put(self::LOGIN_FORM_REFERER_SESSION_KEY, \request()->headers->get('referer'));
-
         return view('magiclink::magiclink.send-link-form', [
-            'referer' => Session::get('login-form-referer'),
+            'referer' => route(Session::get(MagicLink::LOGIN_FORM_ROUTE_NAME_SESSION_KEY)),
         ]);
     }
 
@@ -40,14 +37,16 @@ final class MagicLinkController extends BaseWebController
         $user = User::findByEmail($request->email);
 
         if ($user !== null) {
-            $link = $this->magicLinkRepository->createForUser($user)->generate();
+            $link = $this->magicLinkRepository->createForUser($user)
+                                              ->redirectTo(Session::get(MagicLink::LOGIN_FORM_ROUTE_NAME_SESSION_KEY))
+                                              ->generate();
             event(new LinkCreated($link, $user));
         }
 
         session()->flash('success', __('magiclink::web.address_exists_then_email'));
 
         return [
-            'redirect' => Session::get(self::LOGIN_FORM_REFERER_SESSION_KEY),
+            'redirect' => route(Session::get(MagicLink::LOGIN_FORM_ROUTE_NAME_SESSION_KEY)),
         ];
     }
 }
