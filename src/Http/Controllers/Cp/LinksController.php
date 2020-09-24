@@ -15,13 +15,13 @@ final class LinksController extends BaseCpController
 
     public function __construct(MagicLinkManager $magicLinkManager)
     {
-        $this->authorize('view links');
-
         $this->magicLinkManager = $magicLinkManager;
     }
 
     public function index()
     {
+        $this->authorize('view links');
+
         $links = $this->magicLinkManager->get()->map(function ($link) {
             $link['expire_time'] = Carbon::createFromTimestamp($link['expire_time'])->toDateTimeString();
 

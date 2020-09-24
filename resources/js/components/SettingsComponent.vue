@@ -1,5 +1,11 @@
 <template>
     <div>
+        <div class="mb-1 content">
+            <h2 class="text-base">
+                {{ __('General') }}
+            </h2>
+        </div>
+
         <publish-fields-container class="card p-0 mb-3 configure-section">
 
             <form-group
@@ -22,6 +28,28 @@
 
         </publish-fields-container>
 
+        <div class="mb-1 content">
+            <h2 class="text-base">
+                Protected content
+                <button class="btn-sm" @click="addAddress">
+                    + Add new address
+                </button>
+            </h2>
+        </div>
+
+        <publish-fields-container class="card p-0 mb-3 configure-section">
+            <div v-for="(address, index) in countAddresses">
+                <form-group
+                    class="border-b"
+                    handle="allowedAddresses[]"
+                    :display="__('magiclink::cp.settings.ml_allowed_addresses')"
+                    :errors="errors.allowedAddresses"
+                    :instructions="__('magiclink::cp.settings.ml_allowed_addresses_instructions')"
+                    v-model="allowedAddresses[index]"
+                />
+            </div>
+        </publish-fields-container>
+
         <div class="py-2 mt-3 border-t flex justify-between">
             <a :href="indexUrl" class="btn" v-text="__('Cancel') "/>
             <button type="submit" class="btn-primary" @click="save">{{ __('Save') }}</button>
@@ -34,6 +62,7 @@
     export default {
         props: {
             action: String,
+            initialAllowedAddresses: Array,
             initialExpireTime: {
                 type: Number,
                 required: true,
@@ -54,6 +83,8 @@
 
         data() {
           return {
+              allowedAddresses: this.initialAllowedAddresses,
+              countAddresses: this.initialAllowedAddresses.length + 1,
               error: null,
               errors: {},
               enabled: this.initialEnabled,
@@ -68,6 +99,7 @@
 
             payload() {
                 return {
+                    allowedAddresses: this.allowedAddresses,
                     enabled: this.enabled,
                     expireTime: this.expireTime,
                 }
@@ -78,6 +110,10 @@
             clearErrors() {
                 this.error = null;
                 this.errors = {};
+            },
+
+            addAddress() {
+                this.countAddresses += 1;
             },
 
             save() {

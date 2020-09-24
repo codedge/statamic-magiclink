@@ -7,6 +7,11 @@ show a magic link login below the normal password login form:
 *  `{{ magiclink:login-link }}`: Displays a completely rendered `a` tag. For customizing the html, see [Customization](#Customization).
 *  `{{ magiclink:login-route }}`: Return the route to the magic link form. Use this with your own markup. 
 
+## Allowed addresses
+
+You can define which users can request magic links. The default is, that all users that have a CP user account can request a magic link. 
+
+
 ## Permissions
 
 The access to settings of MagicLink can be restricted to certain users. When navigation to _Permissions_ inside the

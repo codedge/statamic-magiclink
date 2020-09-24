@@ -6,31 +6,39 @@ namespace Codedge\MagicLink\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Session;
 
 final class MagicLink
 {
-    const LOGIN_FORM_ROUTE_NAME_SESSION_KEY = 'login-form-route-name';
-
-    protected Router $router;
-
-    public function __construct(Router $router)
-    {
-        $this->router = $router;
-    }
+    const LOGIN_FORM_URL_SESSION_KEY = 'magic-link:login-form-url';
+    const MAGIC_LINK_REDIRECT_TO = 'magic-link:redirect-to';
 
     public function handle(Request $request, Closure $next)
     {
-        $previousRoute = $request->create(url()->previous());
+        $previousUrl = url()->previous();
+        $redirectTo = $previousUrl;
 
-        if($request->has('referer')) {
-            $previousRoute = $request->create($request->get('referer'));
+        if($request->headers->get('referer')) {
+            $previousUrl = $request->headers->get('referer');
+            $redirectTo = $this->extractRedirect($request->headers->get('referer'));
         }
 
-        $previousRouteName = $this->router->getRoutes()->match($previousRoute)->getName();
-        Session::put(self::LOGIN_FORM_ROUTE_NAME_SESSION_KEY, $previousRouteName);
+        Session::put(self::LOGIN_FORM_URL_SESSION_KEY, $previousUrl);
+        Session::put(self::MAGIC_LINK_REDIRECT_TO, $redirectTo);
 
         return $next($request);
+    }
+
+    private function extractRedirect(string $url): string
+    {
+        $redirect = $url;
+
+        preg_match('/redirect=(.*)/', $url, $matches);
+
+        if(isset($matches[1]) && !empty($matches[1])) {
+            $redirect = $matches[1];
+        }
+
+        return $redirect;
     }
 }

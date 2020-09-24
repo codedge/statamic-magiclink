@@ -95,7 +95,7 @@ final class ServiceProvider extends AddonServiceProvider
                 ->section('Tools')
                 ->children([
                     Nav::item(__('magiclink::cp.settings.settings'))->route('magiclink.index')
-                                                                    ->can('view settings'),
+                                                                    ->can('view magiclink settings'),
                     Nav::item(__('magiclink::cp.links.links'))->route('magiclink.links.index')
                                                               ->can('view links'),
                 ]);
@@ -106,7 +106,7 @@ final class ServiceProvider extends AddonServiceProvider
     {
         $this->app->booted(function () {
             Permission::group('magiclink_general', __('magiclink::cp.permissions.settings'), function () {
-                Permission::register('view settings', function (\Statamic\Auth\Permission $permission) {
+                Permission::register('view magiclink settings', function (\Statamic\Auth\Permission $permission) {
                     $permission
                         ->label(__('magiclink::cp.permissions.view_settings'))
                         ->description(__('magiclink::cp.permissions.view_settings_description'));

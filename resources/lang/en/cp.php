@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 return [
     'links' => [
-        'links' => 'Links',
-        'redirect_to' => 'Redirect to',
         'expire_time' => 'Expire time',
+        'links' => 'Links',
         'no_links' => 'No links created yet.',
+        'pw_protected' => 'Password protected',
+        'redirect_to' => 'Redirect to',
     ],
     'settings' => [
         'headline'                    => 'MagicLink',
@@ -16,6 +17,8 @@ return [
         'ml_enabled_instructions'     => 'Activate or deactivate the usage of magic links.',
         'ml_expire_time'              => 'Expire time',
         'ml_expire_time_instructions' => 'Time the login link is valid. Default is 30 minutes.',
+        'ml_allowed_addresses' => 'Allowed addresses',
+        'ml_allowed_addresses_instructions' => 'Allowed addresses to request a magic link for viewing protected content. Enter one address in each field.',
         'settings'                    => 'Settings',
         'updated_successfully'        => 'Settings updated successfully.',
     ],

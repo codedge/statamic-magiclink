@@ -10,6 +10,7 @@ instead use a magic link which is sent by email.
 **Features**
 * Login to Control Panel with magic links
 * Login to protected content with custom password form with magic links
+* Restrict sending magic links to defined email addresses
 * Display issued magic links in Control Panel
 * Permission scheme for display links and settings in Control Panel
 
@@ -36,6 +37,10 @@ On the CP login page you can now see a link "Send Magic Link".
 # Wishes & ideas
 
 Just open an [issue at Github](https://github.com/codedge/statamic-magiclink/issues).
+
+# Security
+
+If you find any security related issues, please get in contact via post@codedge.de first. Please do not open an issues on Github.
 
 # License 
 

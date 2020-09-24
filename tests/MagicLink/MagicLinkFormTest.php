@@ -4,7 +4,10 @@ declare(strict_types=1);
 
 namespace Codedge\MagicLink\Tests\MagicLink;
 
+use Codedge\MagicLink\Events\LinkCreated;
+use Codedge\MagicLink\Http\Middleware\MagicLink;
 use Codedge\MagicLink\Tests\TestCase;
+use Statamic\Facades\User;
 
 class MagicLinkFormTest extends TestCase
 {
@@ -34,15 +37,35 @@ class MagicLinkFormTest extends TestCase
              ->assertSessionHasErrors(['email']);
     }
 
-//    /** @test */
-//    public function can_request_link_for_non_existing_user(): void
-//    {
-//        $payload = [
-//            'email' => 'john@doe.com'
-//        ];
-//
-//        $this->post(route('magiclink.send-link'), $payload)->assertOk();
-//
-//
-//    }
+    /** @test */
+    public function can_request_link_for_non_existing_and_non_allowed_user(): void
+    {
+        $this->doesntExpectEvents([LinkCreated::class]);
+
+        $payload = [
+            'email' => 'i@donotexist.com',
+        ];
+
+        $this->post(route('magiclink.send-link'), $payload)
+             ->assertOk()
+             ->assertSessionHas('success', __('magiclink::web.address_exists_then_email'));
+    }
+
+    /** @test */
+    public function can_request_link_for_existing_user(): void
+    {
+        $this->expectsEvents([LinkCreated::class]);
+
+        $user = User::make();
+        $user->id(99)->email('test@test.com');
+
+        $payload = [
+            'email' => 'test@test.com',
+        ];
+
+        $this->withSession([MagicLink::MAGIC_LINK_REDIRECT_TO => cp_route('dashboard')])
+             ->post(route('magiclink.send-link'), $payload)
+             ->assertOk()
+             ->assertSessionHas('success', __('magiclink::web.address_exists_then_email'));
+    }
 }

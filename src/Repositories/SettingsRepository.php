@@ -12,6 +12,7 @@ final class SettingsRepository
 {
     const IS_ENABLED_KEY = 'enabled';
     const EXPIRE_TIME_KEY = 'expireTime';
+    const ALLOWED_ADDRESSES = 'allowedAddresses';
 
     private array $defaultValues;
 
@@ -26,6 +27,7 @@ final class SettingsRepository
         $this->defaultValues = [
             self::IS_ENABLED_KEY  => false,
             self::EXPIRE_TIME_KEY => config('statamic-magiclink.expire_time'),
+            self::ALLOWED_ADDRESSES => [],
         ];
     }
 
@@ -37,6 +39,11 @@ final class SettingsRepository
     public function expireTime(): int
     {
         return (int) $this->get()->get(self::EXPIRE_TIME_KEY);
+    }
+
+    public function allowedAddresses(): Collection
+    {
+        return collect($this->get()->get(self::ALLOWED_ADDRESSES));
     }
 
     public function get(): Collection

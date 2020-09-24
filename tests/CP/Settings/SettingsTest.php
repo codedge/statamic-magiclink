@@ -6,6 +6,7 @@ namespace Codedge\MagicLink\Tests\CP\Settings;
 
 use Codedge\MagicLink\Repositories\SettingsRepository;
 use Codedge\MagicLink\Tests\TestCase;
+use Illuminate\Validation\ValidationException;
 
 class SettingsTest extends TestCase
 {
@@ -15,12 +16,12 @@ class SettingsTest extends TestCase
         $this->signInAdmin();
     }
 
-    /** @test */
+
     public function can_see_settings(): void
     {
         $this->get(cp_route('magiclink.index'))
-             ->assertSee('Expire time')
-             ->assertSee('MagicLink enabled?');
+             ->assertSee(__('magiclink::cp.settings.ml_expire_time'))
+             ->assertSee(__('magiclink::cp.settings.ml_enabled'));
     }
 
     /** @test */
@@ -29,6 +30,7 @@ class SettingsTest extends TestCase
         $payload = [
             'enabled'    => true,
             'expireTime' => 999,
+            'allowedAddresses' => [],
         ];
 
         $this->patch(cp_route('magiclink.update'), $payload)->assertOk();
@@ -43,10 +45,12 @@ class SettingsTest extends TestCase
         $payload = [
             'enabled'    => 123,
             'expireTime' => 'test',
+            'allowedAddresses' => ['wrong'],
         ];
 
         $this->patch(cp_route('magiclink.update'), $payload)
-             ->assertSessionHasErrors(array_keys($payload));
+             ->assertSessionMissing('success')
+             ->assertSessionHasErrors(['enabled', 'expireTime', 'allowedAddresses.0']);
     }
 
     /** @test */
@@ -55,6 +59,7 @@ class SettingsTest extends TestCase
         $payload = [
             'enabled'    => 123,
             'expireTime' => 30,
+            'allowedAddresses' => [],
         ];
 
         $this->patch(cp_route('magiclink.update'), $payload)
@@ -74,6 +79,7 @@ class SettingsTest extends TestCase
         $payload = [
             'enabled'    => true,
             'expireTime' => 'test',
+            'allowedAddresses' => [],
         ];
 
         $this->patch(cp_route('magiclink.update'), $payload)
@@ -95,6 +101,7 @@ class SettingsTest extends TestCase
         $payload = [
             'enabled'    => true,
             'expireTime' => 300,
+            'allowedAddresses' => [],
         ];
 
         $this->patch(cp_route('magiclink.update'), $payload);
@@ -103,6 +110,7 @@ class SettingsTest extends TestCase
         $payload = [
             'enabled'    => false,
             'expireTime' => 300,
+            'allowedAddresses' => [],
         ];
 
         $this->patch(cp_route('magiclink.update'), $payload);
@@ -117,6 +125,7 @@ class SettingsTest extends TestCase
         $payload = [
             'enabled'    => true,
             'expireTime' => 300,
+            'allowedAddresses' => [],
         ];
 
         $this->patch(cp_route('magiclink.update'), $payload);

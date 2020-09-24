@@ -7,6 +7,7 @@ namespace Codedge\MagicLink\Http\Controllers;
 use Codedge\MagicLink\Events\LinkCreated;
 use Codedge\MagicLink\Http\Middleware\MagicLink;
 use Codedge\MagicLink\MagicLinkManager;
+use Codedge\MagicLink\Repositories\SettingsRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Statamic\Facades\User;
@@ -14,17 +15,19 @@ use Statamic\Facades\User;
 final class MagicLinkController extends BaseWebController
 {
     protected MagicLinkManager $magicLinkRepository;
+    protected SettingsRepository $settingsRepository;
     protected User $user;
 
-    public function __construct(MagicLinkManager $magicLinkRepository)
+    public function __construct(MagicLinkManager $magicLinkRepository, SettingsRepository $settingsRepository)
     {
         $this->magicLinkRepository = $magicLinkRepository;
+        $this->settingsRepository = $settingsRepository;
     }
 
     public function showSendLinkForm()
     {
         return view('magiclink::magiclink.send-link-form', [
-            'referer' => route(Session::get(MagicLink::LOGIN_FORM_ROUTE_NAME_SESSION_KEY)),
+            'referer' => Session::get(MagicLink::LOGIN_FORM_URL_SESSION_KEY),
         ]);
     }
 
@@ -34,19 +37,37 @@ final class MagicLinkController extends BaseWebController
             'email' => ['required', 'email'],
         ]);
 
-        $user = User::findByEmail($request->email);
+        $user = $this->prepareUser($request);
 
-        if ($user !== null) {
+        if(null !== $user) {
             $link = $this->magicLinkRepository->createForUser($user)
-                                              ->redirectTo(Session::get(MagicLink::LOGIN_FORM_ROUTE_NAME_SESSION_KEY))
+                                              ->redirectTo(Session::get(MagicLink::MAGIC_LINK_REDIRECT_TO))
                                               ->generate();
+
             event(new LinkCreated($link, $user));
+
         }
 
         session()->flash('success', __('magiclink::web.address_exists_then_email'));
 
         return [
-            'redirect' => route(Session::get(MagicLink::LOGIN_FORM_ROUTE_NAME_SESSION_KEY)),
+            'redirect' => Session::get(MagicLink::LOGIN_FORM_URL_SESSION_KEY),
         ];
+    }
+
+    private function prepareUser(Request $request): ?\Statamic\Contracts\Auth\User
+    {
+        $user = User::findByEmail($request->email);
+
+        /*
+         * Special check for protected content, when no CP user exists.
+         */
+        if($user === null) {
+            if($this->settingsRepository->allowedAddresses()->contains($request->email)) {
+                $user = (User::make())->email($request->email);
+            }
+        }
+
+        return $user;
     }
 }

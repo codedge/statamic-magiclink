@@ -126,6 +126,13 @@ class TestCase extends OrchestraTestCase
         foreach ($configs as $config) {
             $app['config']->set("statamic.$config", require(__DIR__."/../vendor/statamic/cms/config/{$config}.php"));
         }
+        $app['config']->set('auth.providers.users.driver', 'statamic');
+        $app['config']->set('statamic.stache.watcher', false);
+        $app['config']->set('statamic.users.repository', 'file');
+        $app['config']->set('statamic.stache.stores.users', [
+            'class' => \Statamic\Stache\Stores\UsersStore::class,
+            'directory' => __DIR__.'/__fixtures__/users',
+        ]);
 
         // Setting the user repository to the default flat file system
         $app['config']->set('statamic.users.repository', 'file');

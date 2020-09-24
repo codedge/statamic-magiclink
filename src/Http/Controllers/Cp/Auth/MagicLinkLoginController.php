@@ -32,8 +32,8 @@ class MagicLinkLoginController extends BaseCpController
             Auth::guard('web')->login($user);
         }
 
-        $redirect = !empty($this->magicLinkManager->get()->get($user->email())['redirect_to'])
-                    ? route($this->magicLinkManager->get()->get($user->email())['redirect_to'])
+        $redirect = !empty($this->magicLinkManager->get()->get($request->get('user_email'))['redirect_to'])
+                    ? $this->magicLinkManager->get()->get($request->get('user_email'))['redirect_to']
                     : cp_route(config('statamic-magiclink.url.redirect_on_success'));
 
         return redirect($redirect);
