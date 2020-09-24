@@ -18,7 +18,7 @@ final class MagicLink
         $previousUrl = url()->previous();
         $redirectTo = $previousUrl;
 
-        if($request->headers->get('referer')) {
+        if ($request->headers->get('referer')) {
             $previousUrl = $request->headers->get('referer');
             $redirectTo = $this->extractRedirect($request->headers->get('referer'));
         }
@@ -35,7 +35,7 @@ final class MagicLink
 
         preg_match('/redirect=(.*)/', $url, $matches);
 
-        if(isset($matches[1]) && !empty($matches[1])) {
+        if (isset($matches[1]) && ! empty($matches[1])) {
             $redirect = $matches[1];
         }
 

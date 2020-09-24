@@ -6,7 +6,6 @@ namespace Codedge\MagicLink\Tests\CP\Settings;
 
 use Codedge\MagicLink\Repositories\SettingsRepository;
 use Codedge\MagicLink\Tests\TestCase;
-use Illuminate\Validation\ValidationException;
 
 class SettingsTest extends TestCase
 {
@@ -15,7 +14,6 @@ class SettingsTest extends TestCase
         parent::setUp();
         $this->signInAdmin();
     }
-
 
     public function can_see_settings(): void
     {
