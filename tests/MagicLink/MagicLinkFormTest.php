@@ -93,5 +93,4 @@ class MagicLinkFormTest extends TestCase
             return $mail->hasTo($user->email());
         });
     }
-
 }
