@@ -15,7 +15,6 @@ class SettingsTest extends TestCase
         $this->signInAdmin();
     }
 
-
     public function can_see_settings(): void
     {
         $this->get(cp_route('magiclink.index'))

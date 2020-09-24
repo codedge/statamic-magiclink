@@ -33,7 +33,7 @@ final class SettingsController extends BaseCpController
             'enabled'    => ['required', 'boolean'],
             'expireTime' => ['required', 'numeric'],
             'allowedAddresses' => ['present', 'array'],
-            'allowedAddresses.*' => ['sometimes', 'email']
+            'allowedAddresses.*' => ['sometimes', 'email'],
         ]);
 
         $this->settingsRepository->put($request);

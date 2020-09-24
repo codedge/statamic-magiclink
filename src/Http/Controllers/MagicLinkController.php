@@ -39,13 +39,12 @@ final class MagicLinkController extends BaseWebController
 
         $user = $this->prepareUser($request);
 
-        if(null !== $user) {
+        if (null !== $user) {
             $link = $this->magicLinkRepository->createForUser($user)
                                               ->redirectTo(Session::get(MagicLink::MAGIC_LINK_REDIRECT_TO))
                                               ->generate();
 
             event(new LinkCreated($link, $user));
-
         }
 
         session()->flash('success', __('magiclink::web.address_exists_then_email'));
@@ -62,8 +61,8 @@ final class MagicLinkController extends BaseWebController
         /*
          * Special check for protected content, when no CP user exists.
          */
-        if($user === null) {
-            if($this->settingsRepository->allowedAddresses()->contains($request->email)) {
+        if ($user === null) {
+            if ($this->settingsRepository->allowedAddresses()->contains($request->email)) {
                 $user = (User::make())->email($request->email);
             }
         }
