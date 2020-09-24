@@ -28,7 +28,7 @@ class MagicLinkLoginController extends BaseCpController
          * the protected content feature.
          */
         $user = User::findByEmail($request->get('user_email'));
-        if($user !== null) {
+        if ($user !== null) {
             Auth::guard('web')->login($user);
         }
 
