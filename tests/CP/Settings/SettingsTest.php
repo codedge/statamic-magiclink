@@ -6,7 +6,6 @@ namespace Codedge\MagicLink\Tests\CP\Settings;
 
 use Codedge\MagicLink\Repositories\SettingsRepository;
 use Codedge\MagicLink\Tests\TestCase;
-use Illuminate\Validation\ValidationException;
 
 class SettingsTest extends TestCase
 {
@@ -20,8 +19,18 @@ class SettingsTest extends TestCase
     public function can_see_settings(): void
     {
         $this->get(cp_route('magiclink.index'))
+             ->assertOk()
              ->assertSee(__('magiclink::cp.settings.ml_expire_time'))
              ->assertSee(__('magiclink::cp.settings.ml_enabled'));
+    }
+
+    /** @test */
+    public function cannot_see_settings_with_no_permissions(): void
+    {
+        $this->signInUser();
+
+        $this->get(cp_route('magiclink.index'))
+             ->assertRedirect(cp_route('index'));
     }
 
     /** @test */

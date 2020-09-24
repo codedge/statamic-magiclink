@@ -6,7 +6,9 @@ namespace Codedge\MagicLink\Tests\MagicLink;
 
 use Codedge\MagicLink\Events\LinkCreated;
 use Codedge\MagicLink\Http\Middleware\MagicLink;
+use Codedge\MagicLink\Mail\MagicLink\LinkInformation;
 use Codedge\MagicLink\Tests\TestCase;
+use Illuminate\Support\Facades\Mail;
 use Statamic\Facades\User;
 
 class MagicLinkFormTest extends TestCase
@@ -68,4 +70,28 @@ class MagicLinkFormTest extends TestCase
              ->assertOk()
              ->assertSessionHas('success', __('magiclink::web.address_exists_then_email'));
     }
+
+    /** @test */
+    public function can_sent_email_with_requested_link(): void
+    {
+        $user = User::make();
+        $user->id(99)->email('test@test.com');
+
+        $payload = [
+            'email' => 'test@test.com',
+        ];
+
+        Mail::fake();
+        Mail::assertNothingSent();
+
+        $this->withSession([MagicLink::MAGIC_LINK_REDIRECT_TO => cp_route('dashboard')])
+             ->post(route('magiclink.send-link'), $payload)
+             ->assertOk()
+             ->assertSessionHas('success', __('magiclink::web.address_exists_then_email'));
+
+        Mail::assertQueued(LinkInformation::class, function (LinkInformation $mail) use ($user) {
+            return $mail->hasTo($user->email());
+        });
+    }
+
 }
