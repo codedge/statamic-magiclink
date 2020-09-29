@@ -22,7 +22,6 @@ class LinksTest extends TestCase
              ->assertSee(__('magiclinks::cp.links.no_links'));
     }
 
-
     public function cannot_see_links_when_no_permissions()
     {
         $this->signInUser();
