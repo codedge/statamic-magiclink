@@ -16,12 +16,12 @@ class Magiclink extends Tags
         $this->settingsRepository = $settingsRepository;
     }
 
-    public function loginLink()
+    public function loginLink(): ?string
     {
         return $this->settingsRepository->isEnabled() ? view('magiclink::partials.login-link') : '';
     }
 
-    public function loginRoute(): string
+    public function loginRoute(): ?string
     {
         return $this->settingsRepository->isEnabled() ? route('magiclink.show-send-link-form') : '';
     }
