@@ -3,4 +3,5 @@ composer.lock
 clover.xml
 coverage/
 node_modules/
+package-lock.json
 vendor/
