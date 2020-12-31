@@ -2,6 +2,13 @@ version: 2
 
 updates:
 
+# Update to npm packages
+  - package-ecosystem: "npm"
+    # Everything in the root directory
+    directory: "/"
+    schedule:
+      interval: "daily"
+
   # Update to composer packages
   - package-ecosystem: "composer"
     commit-message:
