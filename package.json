@@ -21,6 +21,6 @@
   },
   "dependencies": {
     "axios": "^0.19.2",
-    "tailwindcss": "^1.8.10"
+    "tailwindcss": "^1.9.6"
   }
 }
