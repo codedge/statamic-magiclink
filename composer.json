@@ -22,7 +22,7 @@
   "require": {
     "php": "^7.4|^8.0",
     "ext-json": "*",
-    "statamic/cms": "^3.0.43"
+    "statamic/cms": "^3.0.44"
   },
   "require-dev": {
     "orchestra/testbench": "^6.12.1",
