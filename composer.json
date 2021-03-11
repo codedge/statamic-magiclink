@@ -22,10 +22,10 @@
   "require": {
     "php": "^7.4|^8.0",
     "ext-json": "*",
-    "statamic/cms": "^3.0.0"
+    "statamic/cms": "^3.0.46"
   },
   "require-dev": {
-    "orchestra/testbench": "^5.0|^6.0",
+    "orchestra/testbench": "^6.13.0",
     "phpunit/phpunit": "^9.5"
   },
   "autoload": {
