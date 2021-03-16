@@ -1,57 +1,65 @@
 {
-  "name": "codedge/statamic-magiclink",
-  "description": "Create secure links for access to private data or Control Panel login without using a password",
-  "keywords": ["statamic", "auth", "login", "link", "magic link", "magiclink", "passwordless"],
-  "type": "statamic-addon",
-  "license": "proprietary",
-  "authors": [
-    {
-      "name": "Holger Lösken",
-      "email": "holger.loesken@codedge.de",
-      "homepage": "https://www.codedge.digital"
-    }
-  ],
-"support": {
-    "issues": "https://github.com/codedge/statamic-magiclink/issues",
-    "source": "https://github.com/codedge/statamic-magiclink"
-},
-  "config": {
-    "process-timeout": 0,
-    "sort-packages": true
-  },
-  "require": {
-    "php": "^7.4|^8.0",
-    "ext-json": "*",
-    "statamic/cms": "^3.0.47"
-  },
-  "require-dev": {
-    "orchestra/testbench": "^6.14.0",
-    "phpunit/phpunit": "^9.5"
-  },
-  "autoload": {
-    "psr-4": {
-      "Codedge\\MagicLink\\": "src"
-    }
-  },
-  "autoload-dev": {
-    "psr-4": {
-      "Codedge\\MagicLink\\Tests\\": "tests"
-    }
-  },
-  "scripts": {
-      "test": "./vendor/bin/phpunit --debug --testdox",
-      "test-coverage": "./vendor/bin/phpunit --coverage-html coverage",
-      "test-clover-coverage": "./vendor/bin/phpunit --coverage-clover clover.xml"
-  },
-  "extra": {
-    "laravel": {
-      "providers": [
-        "Codedge\\MagicLink\\ServiceProvider"
-      ]
+    "name": "codedge/statamic-magiclink",
+    "type": "statamic-addon",
+    "description": "Create secure links for access to private data or Control Panel login without using a password",
+    "keywords": [
+        "statamic",
+        "auth",
+        "login",
+        "link",
+        "magic link",
+        "magiclink",
+        "passwordless"
+    ],
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "Holger Lösken",
+            "email": "holger.loesken@codedge.de",
+            "homepage": "https://www.codedge.digital"
+        }
+    ],
+    "require": {
+        "php": "^7.4 || ^8.0",
+        "ext-json": "*",
+        "statamic/cms": "^3.0.47"
     },
-    "statamic": {
-      "name": "MagicLink",
-      "description": "Login to Control Panel without using a password"
+    "require-dev": {
+        "orchestra/testbench": "^6.14.0",
+        "phpunit/phpunit": "^9.5"
+    },
+    "config": {
+        "process-timeout": 0,
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Codedge\\MagicLink\\ServiceProvider"
+            ]
+        },
+        "statamic": {
+            "description": "Login to Control Panel without using a password",
+            "name": "MagicLink"
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Codedge\\MagicLink\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Codedge\\MagicLink\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "./vendor/bin/phpunit --debug --testdox",
+        "test-clover-coverage": "./vendor/bin/phpunit --coverage-clover clover.xml",
+        "test-coverage": "./vendor/bin/phpunit --coverage-html coverage"
+    },
+    "support": {
+        "issues": "https://github.com/codedge/statamic-magiclink/issues",
+        "source": "https://github.com/codedge/statamic-magiclink"
     }
-  }
 }
