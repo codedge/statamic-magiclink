@@ -54,6 +54,9 @@
         }
     },
     "scripts": {
+        "pre-update-cmd": [
+            "Statamic\\Console\\Composer\\Scripts::preUpdateCmd"
+        ],
         "test": "./vendor/bin/phpunit --debug --testdox",
         "test-clover-coverage": "./vendor/bin/phpunit --coverage-clover clover.xml",
         "test-coverage": "./vendor/bin/phpunit --coverage-html coverage"
