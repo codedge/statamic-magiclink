@@ -20,9 +20,9 @@
         }
     ],
     "require": {
-        "php": "^7.4 || ^8.0",
+        "php": "^8.0",
         "ext-json": "*",
-        "statamic/cms": "^3.0.48"
+        "statamic/cms": "^3.1"
     },
     "require-dev": {
         "orchestra/testbench": "^6.15.0",
@@ -54,6 +54,9 @@
         }
     },
     "scripts": {
+        "pre-update-cmd": [
+            "Statamic\\Console\\Composer\\Scripts::preUpdateCmd"
+        ],
         "test": "./vendor/bin/phpunit --debug --testdox",
         "test-clover-coverage": "./vendor/bin/phpunit --coverage-clover clover.xml",
         "test-coverage": "./vendor/bin/phpunit --coverage-html coverage"
