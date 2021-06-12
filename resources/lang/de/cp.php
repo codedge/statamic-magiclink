@@ -9,7 +9,7 @@ return [
         'ml_enabled'                  => 'MagicLink aktivieren?',
         'ml_enabled_instructions'     => 'Aktiviere oder deaktiviere die Nutzung von MagicLinks',
         'ml_expire_time'              => 'Ablaufzeit',
-        'ml_expire_time_instructions' => 'Laufzeit des Links, nachdem er verfällt. Standart sind 30 Minuten.',
+        'ml_expire_time_instructions' => 'Laufzeit des Links, nachdem er verfällt. Standard sind 30 Minuten.',
         'updated_successfully'        => 'Einstellungen erfolgreich aktualisiert.',
     ],
     'permissions' => [

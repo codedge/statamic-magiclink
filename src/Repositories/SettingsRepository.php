@@ -13,6 +13,7 @@ final class SettingsRepository
     const IS_ENABLED_KEY = 'enabled';
     const EXPIRE_TIME_KEY = 'expireTime';
     const ALLOWED_ADDRESSES = 'allowedAddresses';
+    const ALLOWED_DOMAINS = 'allowedDomains';
 
     private array $defaultValues;
 
@@ -28,6 +29,7 @@ final class SettingsRepository
             self::IS_ENABLED_KEY  => false,
             self::EXPIRE_TIME_KEY => config('statamic-magiclink.expire_time'),
             self::ALLOWED_ADDRESSES => [],
+            self::ALLOWED_DOMAINS => [],
         ];
     }
 
@@ -46,6 +48,11 @@ final class SettingsRepository
         return collect($this->get()->get(self::ALLOWED_ADDRESSES));
     }
 
+    public function allowedDomains(): Collection
+    {
+        return collect($this->get()->get(self::ALLOWED_DOMAINS));
+    }
+
     public function get(): Collection
     {
         if (! $this->files->exists($this->path)) {
@@ -55,7 +62,7 @@ final class SettingsRepository
         return collect(YAML::parse($this->files->get($this->path)));
     }
 
-    public function put($content)
+    public function put(Collection $content)
     {
         if (! $this->files->isDirectory($dir = dirname($this->path))) {
             $this->files->makeDirectory($dir);

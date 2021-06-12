@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Codedge\MagicLink;
 
+use Codedge\MagicLink\Repositories\SettingsRepository;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Collection;
 use Statamic\Contracts\Auth\User;
@@ -13,12 +14,14 @@ final class MagicLinkManager
 {
     protected MagicLink $magicLink;
     protected Filesystem $files;
+    protected SettingsRepository $settingsRepository;
     protected string $path;
     protected User $user;
 
-    public function __construct(Filesystem $files)
+    public function __construct(Filesystem $files, SettingsRepository $settingsRepository)
     {
         $this->files = $files;
+        $this->settingsRepository = $settingsRepository;
         $this->path = storage_path('statamic-magiclink/magic-links.yaml');
     }
 
@@ -74,5 +77,33 @@ final class MagicLinkManager
         $merged = $existing->merge($content);
 
         return $this->files->put($this->path, YAML::dump($merged->all()));
+    }
+
+    /**
+     * Validate a given email address against the addresses set either in
+     * - ALLOWED_ADDRESSES
+     * - ALLOWED_DOMAINS
+     *
+     * If no allowed address or domain is set, the given email is considered valid.
+     */
+    public function validAddress(string $email): bool
+    {
+        $valid = true;
+
+        if($this->settingsRepository->allowedAddresses()->count() !== 0) {
+            if(!in_array($email, $this->settingsRepository->allowedAddresses()->toArray())) {
+                $valid = false;
+            }
+        }
+
+        if($this->settingsRepository->allowedDomains()->count() !== 0) {
+            $parts = explode('@', $email);
+            if(!in_array($parts[0], $this->settingsRepository->allowedDomains()->toArray())
+            ) {
+                $valid = false;
+            }
+        }
+
+        return $valid;
     }
 }

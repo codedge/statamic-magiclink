@@ -34,9 +34,14 @@ final class SettingsController extends BaseCpController
             'expireTime' => ['required', 'numeric'],
             'allowedAddresses' => ['present', 'array'],
             'allowedAddresses.*' => ['sometimes', 'email'],
+            'allowedDomains' => ['present', 'array'],
         ]);
 
-        $this->settingsRepository->put($request);
+        $payload = $request->all();
+        $payload['allowedDomains'] = array_filter($payload['allowedDomains']);
+        $payload['allowedAddresses'] = array_filter($payload['allowedAddresses']);
+
+        $this->settingsRepository->put(collect($payload));
 
         session()->flash('success', __('magiclink::cp.settings.updated_successfully'));
 

@@ -38,7 +38,7 @@
         </div>
 
         <publish-fields-container class="card p-0 mb-3 configure-section">
-            <div v-for="(address, index) in countAddresses">
+            <div v-for="(a, index) in countAddresses">
                 <form-group
                     class="border-b"
                     handle="allowedAddresses[]"
@@ -46,6 +46,28 @@
                     :errors="errors.allowedAddresses"
                     :instructions="__('magiclink::cp.settings.ml_allowed_addresses_instructions')"
                     v-model="allowedAddresses[index]"
+                />
+            </div>
+        </publish-fields-container>
+
+        <div class="mb-1 content">
+            <h2 class="text-base">
+                {{ __('magiclink::cp.settings.ml_allowed_domains') }}
+                <button class="btn-sm" @click="addDomain">
+                    + Add new domain
+                </button>
+            </h2>
+        </div>
+
+        <publish-fields-container class="card p-0 mb-3 configure-section">
+            <div v-for="(d, index) in countDomains">
+                <form-group
+                    class="border-b"
+                    handle="allowedDomains[]"
+                    :display="__('magiclink::cp.settings.ml_allowed_domains')"
+                    :errors="errors.allowedDomains"
+                    :instructions="__('magiclink::cp.settings.ml_allowed_domains_instructions')"
+                    v-model="allowedDomains[index]"
                 />
             </div>
         </publish-fields-container>
@@ -63,6 +85,7 @@
         props: {
             action: String,
             initialAllowedAddresses: Array,
+            initialAllowedDomains: Array,
             initialExpireTime: {
                 type: Number,
                 required: true,
@@ -85,6 +108,8 @@
           return {
               allowedAddresses: this.initialAllowedAddresses,
               countAddresses: this.initialAllowedAddresses.length + 1,
+              allowedDomains: this.initialAllowedDomains,
+              countDomains: this.initialAllowedDomains.length + 1,
               error: null,
               errors: {},
               enabled: this.initialEnabled,
@@ -100,6 +125,7 @@
             payload() {
                 return {
                     allowedAddresses: this.allowedAddresses,
+                    allowedDomains: this.allowedDomains,
                     enabled: this.enabled,
                     expireTime: this.expireTime,
                 }
@@ -114,6 +140,10 @@
 
             addAddress() {
                 this.countAddresses += 1;
+            },
+
+            addDomain() {
+                this.countDomains += 1;
             },
 
             save() {
