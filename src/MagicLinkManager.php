@@ -82,7 +82,7 @@ final class MagicLinkManager
     /**
      * Validate a given email address against the addresses set either in
      * - ALLOWED_ADDRESSES
-     * - ALLOWED_DOMAINS
+     * - ALLOWED_DOMAINS.
      *
      * If no allowed address or domain is set, the given email is considered valid.
      */
@@ -90,15 +90,15 @@ final class MagicLinkManager
     {
         $valid = true;
 
-        if($this->settingsRepository->allowedAddresses()->count() !== 0) {
-            if(!in_array($email, $this->settingsRepository->allowedAddresses()->toArray())) {
+        if ($this->settingsRepository->allowedAddresses()->count() !== 0) {
+            if (! in_array($email, $this->settingsRepository->allowedAddresses()->toArray())) {
                 $valid = false;
             }
         }
 
-        if($this->settingsRepository->allowedDomains()->count() !== 0) {
+        if ($this->settingsRepository->allowedDomains()->count() !== 0) {
             $parts = explode('@', $email);
-            if(!in_array($parts[0], $this->settingsRepository->allowedDomains()->toArray())
+            if (! in_array($parts[0], $this->settingsRepository->allowedDomains()->toArray())
             ) {
                 $valid = false;
             }
