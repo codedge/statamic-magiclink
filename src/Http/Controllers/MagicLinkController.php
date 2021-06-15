@@ -62,8 +62,8 @@ final class MagicLinkController extends BaseWebController
         /*
          * Special check for protected content, when no CP user exists.
          */
-        if ($user == null) {
-            if($this->magicLinkRepository->validAddress($request->email)) {
+        if ($user === null) {
+            if ($this->magicLinkRepository->validAddress($request->email)) {
                 $user = (User::make())->email($request->email);
             }
         }
