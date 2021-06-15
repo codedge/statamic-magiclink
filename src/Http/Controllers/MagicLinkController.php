@@ -40,7 +40,6 @@ final class MagicLinkController extends BaseWebController
         $user = $this->prepareUser($request);
 
         if (null !== $user) {
-
             $link = $this->magicLinkRepository->createForUser($user)
                                               ->redirectTo(Session::get(MagicLink::MAGIC_LINK_REDIRECT_TO))
                                               ->generate();
