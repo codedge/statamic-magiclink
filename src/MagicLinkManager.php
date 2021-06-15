@@ -88,19 +88,19 @@ final class MagicLinkManager
      */
     public function validAddress(string $email): bool
     {
-        $valid = true;
+        $valid = false;
 
         if($this->settingsRepository->allowedAddresses()->count() !== 0) {
-            if(!in_array($email, $this->settingsRepository->allowedAddresses()->toArray())) {
-                $valid = false;
+            if(in_array($email, $this->settingsRepository->allowedAddresses()->toArray())) {
+                $valid = true;
             }
         }
 
         if($this->settingsRepository->allowedDomains()->count() !== 0) {
             $parts = explode('@', $email);
-            if(!in_array($parts[0], $this->settingsRepository->allowedDomains()->toArray())
+            if(in_array($parts[1], $this->settingsRepository->allowedDomains()->toArray())
             ) {
-                $valid = false;
+                $valid = true;
             }
         }
 

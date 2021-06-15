@@ -39,6 +39,7 @@ class SettingsTest extends TestCase
             'enabled'    => true,
             'expireTime' => 999,
             'allowedAddresses' => [],
+            'allowedDomains' => [],
         ];
 
         $this->patch(cp_route('magiclink.update'), $payload)->assertOk();
@@ -54,6 +55,7 @@ class SettingsTest extends TestCase
             'enabled'    => 123,
             'expireTime' => 'test',
             'allowedAddresses' => ['wrong'],
+            'allowedDomains' => [],
         ];
 
         $this->patch(cp_route('magiclink.update'), $payload)
@@ -68,6 +70,7 @@ class SettingsTest extends TestCase
             'enabled'    => 123,
             'expireTime' => 30,
             'allowedAddresses' => [],
+            'allowedDomains' => [],
         ];
 
         $this->patch(cp_route('magiclink.update'), $payload)
@@ -88,6 +91,7 @@ class SettingsTest extends TestCase
             'enabled'    => true,
             'expireTime' => 'test',
             'allowedAddresses' => [],
+            'allowedDomains' => [],
         ];
 
         $this->patch(cp_route('magiclink.update'), $payload)
@@ -110,6 +114,7 @@ class SettingsTest extends TestCase
             'enabled'    => true,
             'expireTime' => 300,
             'allowedAddresses' => [],
+            'allowedDomains' => [],
         ];
 
         $this->patch(cp_route('magiclink.update'), $payload);
@@ -119,6 +124,7 @@ class SettingsTest extends TestCase
             'enabled'    => false,
             'expireTime' => 300,
             'allowedAddresses' => [],
+            'allowedDomains' => [],
         ];
 
         $this->patch(cp_route('magiclink.update'), $payload);
@@ -134,6 +140,7 @@ class SettingsTest extends TestCase
             'enabled'    => true,
             'expireTime' => 300,
             'allowedAddresses' => [],
+            'allowedDomains' => [],
         ];
 
         $this->patch(cp_route('magiclink.update'), $payload);
