@@ -13,8 +13,6 @@ jobs:
                 include:
                   - laravel: 8.*
                     testbench: 6.*
-                  - laravel: 7.*
-                    testbench: 5.*
         name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.dependency-version }}
         steps:
             - name: Checkout code
@@ -40,7 +38,7 @@ jobs:
             - name: Install dependencies
               run: |
                   composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" --no-interaction --no-update
-                  composer update --${{ matrix.dependency-version }} --prefer-dist --no-interaction --no-suggest
+                  composer update --${{ matrix.dependency-version }} --prefer-dist --no-interaction
               env:
                   APP_ENV: testing
 
