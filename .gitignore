@@ -4,4 +4,5 @@ clover.xml
 coverage/
 node_modules/
 package-lock.json
+yarn.lock
 vendor/

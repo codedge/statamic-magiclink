@@ -19,6 +19,8 @@ return [
         'ml_expire_time_instructions' => 'Time the login link is valid. Default is 30 minutes.',
         'ml_allowed_addresses' => 'Allowed addresses',
         'ml_allowed_addresses_instructions' => 'Allowed addresses to request a magic link for viewing protected content. Enter one address in each field.',
+        'ml_allowed_domains' => 'Allowed domains',
+        'ml_allowed_domains_instructions' => 'Allowed domains to request a magic link for. _Example:_ example.com',
         'settings'                    => 'Settings',
         'updated_successfully'        => 'Settings updated successfully.',
     ],

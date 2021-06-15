@@ -16,6 +16,7 @@
         :initial-enabled="{{ Statamic\Support\Str::bool($enabled) }}"
         initial-expire-time="{{ $expireTime }}"
         :initial-allowed-addresses="{{ json_encode($allowedAddresses) }}"
+        :initial-allowed-domains="{{ json_encode($allowedDomains) }}"
     ></magiclink-settings>
 
 

@@ -40,6 +40,35 @@ class MagicLinkFormTest extends TestCase
     }
 
     /** @test */
+    public function can_request_link_for_non_existing_but_allowed_domain_user(): void
+    {
+        $this->expectsEvents([LinkCreated::class]);
+        $this->signInAdmin();
+
+        $payload = [
+            'enabled'    => true,
+            'expireTime' => 999,
+            'allowedAddresses' => [],
+            'allowedDomains' => ['larifari.test'],
+        ];
+
+        $this->patch(cp_route('magiclink.update'), $payload)->assertOk();
+
+        $this->app->make('auth')->guard(null)->logout();
+
+        $this->assertGuest();
+
+        $payload = [
+            'email' => 'test@larifari.test',
+        ];
+
+        $this->withSession([MagicLink::MAGIC_LINK_REDIRECT_TO => cp_route('dashboard')])
+             ->post(route('magiclink.send-link'), $payload)
+             ->assertOk()
+             ->assertSessionHas('success', __('magiclink::web.address_exists_then_email'));
+    }
+
+    /** @test */
     public function can_request_link_for_non_existing_and_non_allowed_user(): void
     {
         $this->doesntExpectEvents([LinkCreated::class]);
