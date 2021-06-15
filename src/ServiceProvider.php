@@ -83,7 +83,7 @@ final class ServiceProvider extends AddonServiceProvider
         });
 
         $this->app->bind(MagicLinkManager::class, function () {
-            return new MagicLinkManager(new Filesystem());
+            return new MagicLinkManager(new Filesystem(), resolve(SettingsRepository::class));
         });
     }
 

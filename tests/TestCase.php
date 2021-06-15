@@ -15,7 +15,7 @@ use Statamic\Statamic;
 
 class TestCase extends OrchestraTestCase
 {
-    protected $shouldFakeVersion = true;
+    protected bool $shouldFakeVersion = true;
 
     /**
      * Setup the test environment.
@@ -25,6 +25,7 @@ class TestCase extends OrchestraTestCase
         parent::setUp();
 
         if ($this->shouldFakeVersion) {
+            /** @phpstan-ignore-next-line */
             \Facades\Statamic\Version::shouldReceive('get')->andReturn('3.0.10');
             $this->addToAssertionCount(-1); // Dont want to assert this
         }
