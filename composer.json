@@ -28,7 +28,7 @@
         "nunomaduro/larastan": "^0.7.8",
         "orchestra/testbench": "^6.19.0",
         "phpunit/phpunit": "^9.5",
-        "spatie/ray": "^1.27"
+        "spatie/ray": "^1.28"
     },
     "config": {
         "process-timeout": 0,
