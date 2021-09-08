@@ -34,7 +34,7 @@ class TestCase extends OrchestraTestCase
     /**
      * Sign in a Statamic user.
      *
-     * @param array $permissions
+     * @param  array  $permissions
      *
      * @return mixed
      */
@@ -66,7 +66,7 @@ class TestCase extends OrchestraTestCase
     /**
      * Load package service provider.
      *
-     * @param Application $app
+     * @param  Application  $app
      *
      * @return array
      */
@@ -82,7 +82,7 @@ class TestCase extends OrchestraTestCase
     /**
      * Load package alias.
      *
-     * @param Application $app
+     * @param  Application  $app
      *
      * @return array
      */
@@ -96,7 +96,7 @@ class TestCase extends OrchestraTestCase
     /**
      * Load Environment.
      *
-     * @param Application $app
+     * @param  Application  $app
      */
     protected function getEnvironmentSetUp($app)
     {
@@ -113,7 +113,7 @@ class TestCase extends OrchestraTestCase
     /**
      * Resolve the Application Configuration and set the Statamic configuration.
      *
-     * @param Application $app
+     * @param  Application  $app
      */
     protected function resolveApplicationConfiguration($app)
     {
