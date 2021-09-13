@@ -35,7 +35,6 @@ class TestCase extends OrchestraTestCase
      * Sign in a Statamic user.
      *
      * @param  array  $permissions
-     *
      * @return mixed
      */
     protected function signInUser($permissions = [])
@@ -67,7 +66,6 @@ class TestCase extends OrchestraTestCase
      * Load package service provider.
      *
      * @param  Application  $app
-     *
      * @return array
      */
     protected function getPackageProviders($app)
@@ -83,7 +81,6 @@ class TestCase extends OrchestraTestCase
      * Load package alias.
      *
      * @param  Application  $app
-     *
      * @return array
      */
     protected function getPackageAliases($app)
