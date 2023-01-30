@@ -22,7 +22,7 @@
     "require": {
         "php": "^8.0",
         "ext-json": "*",
-        "statamic/cms": "^3.2"
+        "statamic/cms": "^3.4"
     },
     "require-dev": {
         "nunomaduro/larastan": "^0.7.12",
