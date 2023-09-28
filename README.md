@@ -1,10 +1,10 @@
 # Statamic MagicLink - Login without a password
 
-![Statamic 3.0+](https://img.shields.io/badge/Statamic-3.0+-FF269E?style=for-the-badge&link=https://statamic.com)
+![Statamic 4.0+](https://img.shields.io/badge/Statamic-4.0+-FF269E?style=for-the-badge&link=https://statamic.com)
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/codedge/statamic-magiclink?style=for-the-badge)](https://packagist.org/packages/codedge/statamic-magiclink)
 ![Tests](https://github.com/codedge/statamic-magiclink/workflows/Tests/badge.svg)
 
-A Statamic V3 addon to provide the option to login into the Control Panel or Statamic [Protected Content](https://statamic.dev/protecting-content) feature without using a password,
+A Statamic addon to provide the option to login into the Control Panel or Statamic [Protected Content](https://statamic.dev/protecting-content) feature without using a password,
 instead use a magic link which is sent by email.
 
 **Features**
