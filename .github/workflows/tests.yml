@@ -10,6 +10,9 @@ jobs:
                 php: ['8.0']
                 laravel: [10.*]
                 dependency-version: [prefer-stable]
+                include:
+                  - laravel: 10.*
+                    testbench: 8.*
         name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.dependency-version }}
         steps:
             - name: Checkout code
