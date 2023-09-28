@@ -63,7 +63,7 @@ final class MagicLinkController extends BaseWebController
          */
         if ($user === null) {
             if ($this->magicLinkRepository->validAddress($request->email)) {
-                $user = (User::make())->email($request->email);
+                $user = User::make()->email($request->email);
             }
         }
 
