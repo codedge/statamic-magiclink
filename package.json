@@ -21,7 +21,7 @@
         "postcss-nested": "^5.0.5",
         "resolve-url-loader": "^4.0.0",
         "tailwindcss": "^2.1.2",
-        "vue-loader": "^16.3.0",
+        "vue-loader": "^17.2.2",
         "vue-template-compiler": "^2.6.12"
     },
     "dependencies": {}
