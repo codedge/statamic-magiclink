@@ -71,7 +71,7 @@ final class MagicLink
             'magiclink.login',
             $this->expireTime,
             [
-                'hash'       => $this->generateHash(),
+                'hash' => $this->generateHash(),
                 'user_email' => $this->user->email(),
             ]
         );

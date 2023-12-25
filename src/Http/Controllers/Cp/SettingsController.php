@@ -30,7 +30,7 @@ final class SettingsController extends BaseCpController
         $this->authorize('view magiclink settings');
 
         $request->validate([
-            'enabled'    => ['required', 'boolean'],
+            'enabled' => ['required', 'boolean'],
             'expireTime' => ['required', 'numeric'],
             'allowedAddresses' => ['present', 'array'],
             'allowedAddresses.*' => ['sometimes', 'email'],
