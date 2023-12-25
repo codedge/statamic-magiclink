@@ -45,9 +45,9 @@ final class MagicLinkManager
         $link = $this->magicLink->generate();
 
         $payload[$this->user->email()] = [
-            'email'       => $this->user->email(),
+            'email' => $this->user->email(),
             'expire_time' => $this->magicLink->getExpireTime()->timestamp,
-            'hash'        => $link->getHash(),
+            'hash' => $link->getHash(),
             'redirect_to' => $this->magicLink->getRedirectTo(),
         ];
 
