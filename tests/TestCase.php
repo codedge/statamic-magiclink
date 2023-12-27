@@ -101,7 +101,7 @@ class TestCase extends OrchestraTestCase
 
         $app->make(Manifest::class)->manifest = [
             'codedge/statamic-magiclink' => [
-                'id'        => 'codedge/statamic-magiclink',
+                'id' => 'codedge/statamic-magiclink',
                 'namespace' => 'Codedge\\MagicLink\\',
             ],
         ];
