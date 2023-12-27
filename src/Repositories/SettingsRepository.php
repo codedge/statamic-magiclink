@@ -26,7 +26,7 @@ final class SettingsRepository
         $this->path = storage_path('statamic-magiclink/settings.yaml');
 
         $this->defaultValues = [
-            self::IS_ENABLED_KEY  => false,
+            self::IS_ENABLED_KEY => false,
             self::EXPIRE_TIME_KEY => config('statamic-magiclink.expire_time'),
             self::ALLOWED_ADDRESSES => [],
             self::ALLOWED_DOMAINS => [],
