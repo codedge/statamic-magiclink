@@ -36,7 +36,7 @@ class SettingsTest extends TestCase
     public function can_update_settings_without_error(): void
     {
         $payload = [
-            'enabled'    => true,
+            'enabled' => true,
             'expireTime' => 999,
             'allowedAddresses' => [],
             'allowedDomains' => [],
@@ -52,7 +52,7 @@ class SettingsTest extends TestCase
     public function cannot_update_settings_with_all_errors(): void
     {
         $payload = [
-            'enabled'    => 123,
+            'enabled' => 123,
             'expireTime' => 'test',
             'allowedAddresses' => ['wrong'],
             'allowedDomains' => [],
@@ -67,7 +67,7 @@ class SettingsTest extends TestCase
     public function cannot_update_settings_with_enabled_errors(): void
     {
         $payload = [
-            'enabled'    => 123,
+            'enabled' => 123,
             'expireTime' => 30,
             'allowedAddresses' => [],
             'allowedDomains' => [],
@@ -88,7 +88,7 @@ class SettingsTest extends TestCase
     public function cannot_update_settings_with_expire_time_errors(): void
     {
         $payload = [
-            'enabled'    => true,
+            'enabled' => true,
             'expireTime' => 'test',
             'allowedAddresses' => [],
             'allowedDomains' => [],
@@ -111,7 +111,7 @@ class SettingsTest extends TestCase
         $repository = $this->app->make(SettingsRepository::class);
 
         $payload = [
-            'enabled'    => true,
+            'enabled' => true,
             'expireTime' => 300,
             'allowedAddresses' => [],
             'allowedDomains' => [],
@@ -121,7 +121,7 @@ class SettingsTest extends TestCase
         $this->assertTrue($repository->isEnabled());
 
         $payload = [
-            'enabled'    => false,
+            'enabled' => false,
             'expireTime' => 300,
             'allowedAddresses' => [],
             'allowedDomains' => [],
@@ -137,7 +137,7 @@ class SettingsTest extends TestCase
         $repository = $this->app->make(SettingsRepository::class);
 
         $payload = [
-            'enabled'    => true,
+            'enabled' => true,
             'expireTime' => 300,
             'allowedAddresses' => [],
             'allowedDomains' => [],

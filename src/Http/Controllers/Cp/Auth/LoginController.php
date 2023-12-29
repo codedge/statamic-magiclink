@@ -27,11 +27,11 @@ class LoginController extends StatamicLoginController
         }
 
         $data = [
-            'title'     => __('Log in'),
-            'oauth'     => $enabled = OAuth::enabled(),
+            'title' => __('Log in'),
+            'oauth' => $enabled = OAuth::enabled(),
             'providers' => $enabled ? OAuth::providers() : [],
-            'referer'   => $this->getReferrer(),
-            'hasError'  => $this->hasError(),
+            'referer' => $this->getReferrer(),
+            'hasError' => $this->hasError(),
         ];
 
         $view = view('magiclink::auth.login', $data);

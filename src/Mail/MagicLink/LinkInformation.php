@@ -24,7 +24,7 @@ final class LinkInformation extends Mailable implements ShouldQueue
     {
         return $this->subject(config('app.name').' - '.__('magiclink::cp.email.new_link_subject'))
                     ->markdown('magiclink::emails.new-login-link', [
-                        'userName'  => $this->user->name,
+                        'userName' => $this->user->name,
                         'magicLink' => $this->magicLink->getLink(),
                     ]);
     }
