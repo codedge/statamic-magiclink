@@ -46,7 +46,7 @@ class MagicLinkFormTest extends TestCase
         $this->signInAdmin();
 
         $payload = [
-            'enabled'    => true,
+            'enabled' => true,
             'expireTime' => 999,
             'allowedAddresses' => [],
             'allowedDomains' => ['larifari.test'],
