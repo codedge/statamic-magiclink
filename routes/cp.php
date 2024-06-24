@@ -9,5 +9,5 @@ Route::prefix('magiclink/')->name('magiclink.')->group(function () {
     Route::patch('/update', [SettingsController::class, 'update'])->name('update');
 
     // Links
-    Route::resource('links', 'Cp\LinksController')->only(['index', 'delete']);
+    Route::resource('links', LinksController::class)->only(['index', 'delete']);
 });

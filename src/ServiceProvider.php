@@ -93,9 +93,9 @@ final class ServiceProvider extends AddonServiceProvider
             $nav->create('MagicLink')
                 ->icon('link')
                 ->section('Tools')
+                ->route('magiclink.index')
+                ->can('view magiclink settings')
                 ->children([
-                    Nav::item(__('magiclink::cp.settings.settings'))->route('magiclink.index')
-                                                                    ->can('view magiclink settings'),
                     Nav::item(__('magiclink::cp.links.links'))->route('magiclink.links.index')
                                                               ->can('view links'),
                 ]);
