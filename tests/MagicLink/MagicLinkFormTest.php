@@ -9,11 +9,12 @@ use Codedge\MagicLink\Http\Middleware\MagicLink;
 use Codedge\MagicLink\Mail\MagicLink\LinkInformation;
 use Codedge\MagicLink\Tests\TestCase;
 use Illuminate\Support\Facades\Mail;
+use PHPUnit\Framework\Attributes\Test;
 use Statamic\Facades\User;
 
 class MagicLinkFormTest extends TestCase
 {
-    /** @test */
+    #[Test]
     public function can_show_magic_link_form(): void
     {
         $this->get(route('magiclink.show-send-link-form'))
@@ -21,7 +22,7 @@ class MagicLinkFormTest extends TestCase
              ->assertSee(__('magiclink::web.back_to_classic_login'));
     }
 
-    /** @test */
+    #[Test]
     public function cannot_get_link_for_invalid_address(): void
     {
         $payload = [
@@ -39,7 +40,7 @@ class MagicLinkFormTest extends TestCase
              ->assertSessionHasErrors(['email']);
     }
 
-    /** @test */
+    #[Test]
     public function can_request_link_for_non_existing_but_allowed_domain_user(): void
     {
         $this->expectsEvents([LinkCreated::class]);
@@ -68,7 +69,7 @@ class MagicLinkFormTest extends TestCase
              ->assertSessionHas('success', __('magiclink::web.address_exists_then_email'));
     }
 
-    /** @test */
+    #[Test]
     public function can_request_link_for_non_existing_and_non_allowed_user(): void
     {
         $this->doesntExpectEvents([LinkCreated::class]);
@@ -82,7 +83,7 @@ class MagicLinkFormTest extends TestCase
              ->assertSessionHas('success', __('magiclink::web.address_exists_then_email'));
     }
 
-    /** @test */
+    #[Test]
     public function can_request_link_for_existing_user(): void
     {
         $this->expectsEvents([LinkCreated::class]);
@@ -100,7 +101,7 @@ class MagicLinkFormTest extends TestCase
              ->assertSessionHas('success', __('magiclink::web.address_exists_then_email'));
     }
 
-    /** @test */
+    #[Test]
     public function can_sent_email_with_requested_link(): void
     {
         $user = User::make();

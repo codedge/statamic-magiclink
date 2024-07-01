@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Codedge\MagicLink\Tests\CP\Links;
 
 use Codedge\MagicLink\Tests\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 class LinksTest extends TestCase
 {
@@ -14,7 +15,7 @@ class LinksTest extends TestCase
         $this->signInAdmin();
     }
 
-    /** @test */
+    #[Test]
     public function can_see_links()
     {
         $this->get(cp_route('magiclink.links.index'))
@@ -22,7 +23,7 @@ class LinksTest extends TestCase
              ->assertSee(__('magiclinks::cp.links.no_links'));
     }
 
-    public function cannot_see_links_when_no_permissions()
+    public function cannot_see_links_when_no_permissions(): void
     {
         $this->signInUser();
 
