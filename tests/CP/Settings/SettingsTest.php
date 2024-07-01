@@ -6,6 +6,7 @@ namespace Codedge\MagicLink\Tests\CP\Settings;
 
 use Codedge\MagicLink\Repositories\SettingsRepository;
 use Codedge\MagicLink\Tests\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 class SettingsTest extends TestCase
 {
@@ -23,7 +24,7 @@ class SettingsTest extends TestCase
              ->assertSee(__('magiclink::cp.settings.ml_enabled'));
     }
 
-    /** @test */
+    #[Test]
     public function cannot_see_settings_with_no_permissions(): void
     {
         $this->signInUser();
@@ -32,7 +33,7 @@ class SettingsTest extends TestCase
              ->assertRedirect(cp_route('index'));
     }
 
-    /** @test */
+    #[Test]
     public function can_update_settings_without_error(): void
     {
         $payload = [
@@ -48,7 +49,7 @@ class SettingsTest extends TestCase
              ->assertSee(999);
     }
 
-    /** @test */
+    #[Test]
     public function cannot_update_settings_with_all_errors(): void
     {
         $payload = [
@@ -63,7 +64,7 @@ class SettingsTest extends TestCase
              ->assertSessionHasErrors(['enabled', 'expireTime', 'allowedAddresses.0']);
     }
 
-    /** @test */
+    #[Test]
     public function cannot_update_settings_with_enabled_errors(): void
     {
         $payload = [
@@ -84,7 +85,7 @@ class SettingsTest extends TestCase
              ->assertSessionHasErrors(['enabled']);
     }
 
-    /** @test */
+    #[Test]
     public function cannot_update_settings_with_expire_time_errors(): void
     {
         $payload = [
@@ -105,7 +106,7 @@ class SettingsTest extends TestCase
              ->assertSessionHasErrors(['expireTime']);
     }
 
-    /** @test */
+    #[Test]
     public function can_set_enabled_to_true_false(): void
     {
         $repository = $this->app->make(SettingsRepository::class);
@@ -131,7 +132,7 @@ class SettingsTest extends TestCase
         $this->assertFalse($repository->isEnabled());
     }
 
-    /** @test */
+    #[Test]
     public function can_set_expireTime_to_values(): void
     {
         $repository = $this->app->make(SettingsRepository::class);
