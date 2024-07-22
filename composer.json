@@ -22,7 +22,7 @@
     "require": {
         "php": "^8.3",
         "ext-json": "*",
-        "statamic/cms": "^5.0"
+        "statamic/cms": "^5.17"
     },
     "require-dev": {
         "orchestra/testbench": "^9.1",
